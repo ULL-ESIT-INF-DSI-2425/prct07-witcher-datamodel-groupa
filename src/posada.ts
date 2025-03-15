@@ -87,7 +87,37 @@ export class Posada {
    */
   removeCliente(cliente: Cliente) {
     this._clientes = this._clientes.filter(ccli => ccli.id !== cliente.id);
-  }  
+  }
+
+  /**
+   * Busca un bien por su nombre
+   * @param name - Nombre del bien a buscar
+   * @returns Array de bienes con el nombre buscado
+   */
+  findBienByName(name: string): Bien[] {
+    let found_bienes = this._bienes.filter(bien => bien.name === name);
+    return found_bienes;
+  }
+
+  /**
+   * Busca un bien por el material con el que está hecho
+   * @param material - Material con el que esta hecho el bien a buscar
+   * @returns Array de bienes hechos con el material buscado
+   */
+  findBienByMaterial(material: string): Bien[] {
+    let found_bienes = this._bienes.filter(bien => bien.material === material);
+    return found_bienes;
+  }
+
+  /**
+   * Busca un bien por su descripción
+   * @param description - Descripción del bien a buscar
+   * @returns Array de bienes que coinciden con la descripción buscada
+   */
+  findBienByDescription(description: string): Bien[] {
+    let found_bienes = this._bienes.filter(bien => bien.description === description);
+    return found_bienes;
+  }
 
 }
 
