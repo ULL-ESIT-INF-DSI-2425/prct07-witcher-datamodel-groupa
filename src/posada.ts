@@ -90,34 +90,131 @@ export class Posada {
   }
 
   /**
-   * Busca un bien por su nombre
+   * Busca bienes por su nombre
    * @param name - Nombre del bien a buscar
    * @returns Array de bienes con el nombre buscado
    */
   findBienByName(name: string): Bien[] {
-    let found_bienes = this._bienes.filter(bien => bien.name === name);
-    return found_bienes;
+    /*
+     * ESTRICTO
+     * let bienes_encontrados = this._bienes.filter(bien => bien.name === name);
+     */
+    return (this._bienes.filter((bien) => bien.name.includes(name)));
   }
 
   /**
-   * Busca un bien por el material con el que está hecho
+   * Busca bienes por el material con el que está hecho
    * @param material - Material con el que esta hecho el bien a buscar
    * @returns Array de bienes hechos con el material buscado
    */
   findBienByMaterial(material: string): Bien[] {
-    let found_bienes = this._bienes.filter(bien => bien.material === material);
-    return found_bienes;
+    /*
+     * ESTRICTO
+     * let bienes_encontrados = this._bienes.filter(bien => bien.material === material);
+     */
+    return (this._bienes.filter((bien) => bien.material.includes(material)));
   }
 
   /**
-   * Busca un bien por su descripción
+   * Busca bienes por su descripción
    * @param description - Descripción del bien a buscar
    * @returns Array de bienes que coinciden con la descripción buscada
    */
   findBienByDescription(description: string): Bien[] {
-    let found_bienes = this._bienes.filter(bien => bien.description === description);
-    return found_bienes;
+    /*
+     * ESTRICTO
+     * let bienes_encontrados = this._bienes.filter(bien => bien.description === description);
+     */
+    return (this._bienes.filter(bien => bien.description.includes(description)));
   }
 
-}
+  /**
+   * Ordena bienes por precio de forma ascendente
+   * @param Bienes - Array de bienes a ordenar
+   * @returns Array de bienes ordenados por su precio de forma ascendente
+   */
+  sortBienesByPriceAsc(Bienes: Bien[]): Bien[] {
+    return (Bienes.sort((a, b) => a.price - b.price));
+  }
 
+  /**
+   * Ordena bienes por precio de forma descendente
+   * @param Bienes - Array de bienes a ordenar
+   * @returns Array de bienes ordenados por su precio de forma descendente
+   */
+  sortBienesByPriceDes(Bienes: Bien[]): Bien[] {
+    return (Bienes.sort((a, b) => b.price - a.price)).reverse();
+  }
+
+  /**
+   * Ordena bienes alfabéticamente de forma ascendente
+   * @param Bienes - Array de bienes a ordenar
+   * @returns Array de bienes ordenados alfabéticamente de forma ascendente
+   */
+  sortBienesAlphabeticallyAsc(Bienes: Bien[]): Bien[] {
+    return (Bienes.sort((a, b) => a.name.localeCompare(b.name)));
+  }
+
+  /**
+   * Ordena bienes alfabéticamente de forma descendente
+   * @param Bienes - Array de bienes a ordenar
+   * @returns Array de bienes ordenados alfabéticamente de forma descendente
+   */
+  sortBienesAlphabeticallyDes(Bienes: Bien[]): Bien[] {
+    return (Bienes.sort((a, b) => a.name.localeCompare(b.name))).reverse();
+  }
+
+  /**
+   * Busca mercaderes por su nombre
+   * @param name - Nombre del mercader a buscar
+   * @returns Array de mercaderes con el nombre buscado
+   */
+  findMercaderByName(name: string): Mercader[] {
+    return (this.mercaderes.filter(merc => merc.name.includes(name)));
+  }
+
+  /**
+   * Busca mercaderes por su tipo
+   * @param type - Tipo de mercader a buscar
+   * @returns Array de mercaderes con el tipo buscado
+   */
+  findMercaderByType(type: Tipo_mercader): Mercader[] {
+    return (this.mercaderes.filter(merc => merc.type.includes(type)));
+  }
+
+  /**
+   * Busca mercaderes por su ubicación
+   * @param location - Ubicación del mercader a buscar
+   * @returns Array de mercaderes con la ubicación buscada
+   */
+  findMercaderByLocation(location: Ubicacion): Mercader[] {
+    return (this.mercaderes.filter(merc => merc.location.includes(location)));
+  }
+
+  /**
+   * Busca clientes por su nombre
+   * @param name - Nombre del cliente a buscar
+   * @returns Array de clientes con el nombre buscado
+   */
+  findClienteByName(name:string): Cliente[] {
+    return (this.clientes.filter(cli => cli.name.includes(name)));
+  }
+
+  /**
+   * Busca clientes por su raza
+   * @param raza - Raza del cliente a buscar
+   * @returns Array de clientes con la raza buscada
+   */
+  findClienteByRace(race: Raza): Cliente[] {
+    return (this.clientes.filter(cli => cli.race.includes(race)));
+  }
+
+  /**
+   * Busca clientes por su ubicación
+   * @param location - Ubicación del cliente a buscar
+   * @returns Array de clientes con la ubicación buscada
+   */
+  findClienteByLocation(location: Ubicacion): Cliente[] {
+    return (this.clientes.filter(cli => cli.location.includes(location)));
+  }
+}
