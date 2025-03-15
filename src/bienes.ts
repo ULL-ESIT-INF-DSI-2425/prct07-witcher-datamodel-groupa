@@ -1,3 +1,6 @@
+/**
+ * Interfaz de un bien
+ */
 export interface Bienes{
   id: number;
   name: string;
@@ -6,7 +9,9 @@ export interface Bienes{
   weight: number;
   price: number;
 }
-
+/**
+ * Clase que respresenta un bien
+ */
 export class Bien implements Bienes {
   private _id: number;
   private _name: string;

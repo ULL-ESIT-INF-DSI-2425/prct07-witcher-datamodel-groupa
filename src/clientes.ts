@@ -1,7 +1,12 @@
 import { Ubicacion } from "./mercaderes";
-
+/**
+ * Tipo que contiene las posibles razas de los clientes
+ */
 export type Raza = "Humano" | "Elfo" | "Enano" | "Hechicero"
 
+/**
+ * Interfaz de un cliente
+ */
 export interface Clientes {
     id: number;
     name: string;
@@ -9,6 +14,9 @@ export interface Clientes {
     location: Ubicacion;
 }
 
+/**
+ * Clase que representa un cliente
+ */
 export class Cliente implements Clientes {
   private _id: number;
   private _name: string;

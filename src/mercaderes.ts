@@ -1,7 +1,15 @@
-
+/**
+ * Tipo que recoge los posibles tipos de mercaderes
+ */
 export type Tipo_mercader = "Herrero"| "Alquimista" | "General" | "Joyero" | "Druida"
+/**
+ * Tipo que contiene las posibles ubicaciones de los mercaderes
+ */
 export type Ubicacion = "Novigrad" | "Velen" | "Skellige" | "Kaer Morhen" | "Torremolinos"
 
+/**
+ * Interfaz de un mercader
+ */
 export interface Mercader {
     id: number;
     name: string;
@@ -9,6 +17,9 @@ export interface Mercader {
     location: Ubicacion;
 }
 
+/**
+ * Clase que representa un mercader
+ */
 export class Mercaderes implements Mercader {
   private _id: number;
   private _name: string;
