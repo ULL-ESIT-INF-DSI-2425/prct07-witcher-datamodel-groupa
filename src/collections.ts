@@ -1,5 +1,5 @@
 import { Bien } from './bienes';
-import { Mercader as Mercader } from './mercaderes';
+import { Mercader } from './mercaderes';
 import { Cliente } from './clientes';
 
 /**
