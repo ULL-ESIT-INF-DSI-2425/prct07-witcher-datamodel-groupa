@@ -1,93 +1,94 @@
 
-import { Bien } from "./bienes";
-import { Mercader, Ubicacion, Tipo_mercader } from "./mercaderes";
-import { Cliente, Raza } from "./clientes";
+import { Bien } from "./bienes.js";
+import { Mercader, Ubicacion, Tipo_mercader } from "./mercaderes.js";
+import { BienesCollections, MercaderCollections, ClienteCollections } from "./collections.js";
+ import { Cliente, Raza } from "./clientes.js";
 
 /**
  * Clase que representa una posada
  */
 export class Posada {
-  private _bienes: Bien[];
-  private _mercaderes: Mercader[];
-  private _clientes: Cliente[];
+  private _bienes: BienesCollections;
+  private _mercaderes: MercaderCollections;
+  private _clientes: ClienteCollections;
   
-  constructor(bienes: Bien[], mercaderes: Mercader[], clientes: Cliente[]) {
+  constructor(bienes: BienesCollections, mercaderes: MercaderCollections, clientes: ClienteCollections) {
     this._bienes = bienes;
     this._mercaderes = mercaderes;
     this._clientes = clientes;
   }
   
-  get bienes(): Bien[] {
+  get bienes(): BienesCollections {
     return this._bienes;
   }
 
-  get mercaderes(): Mercader[] {
+  get mercaderes(): MercaderCollections {
     return this._mercaderes;
   }
 
-  get clientes(): Cliente[] {
+  get clientes(): ClienteCollections {
     return this._clientes;
   }
 
-  set bienes(bienes: Bien[]) {
+  set bienes(bienes: BienesCollections) {
     this._bienes = bienes;
   }
 
-  set mercaderes(mercaderes: Mercader[]) {
+  set mercaderes(mercaderes: MercaderCollections) {
     this._mercaderes = mercaderes;
   }
 
-  set clientes(clientes: Cliente[]) {
+  set clientes(clientes: ClienteCollections) {
     this._clientes = clientes;
   }
 
-  /**
-   * Añade un bien a la posada
-   * @param bien - Bien a añadir
-   */
-  addBien(bien: Bien) {
-    this._bienes.push(bien);
-  }
+  // /**
+  //  * Añade un bien a la posada
+  //  * @param bien - Bien a añadir
+  //  */
+  // addBien(bien: Bien) {
+  //   this._bienes.push(bien);
+  // }
 
-  /**
-   * Elimina un bien de la posada
-   * @param bien - Bien a eliminar
-   */
-  removeBien(bien: Bien) {
-    this._bienes = this._bienes.filter(b => b.id !== bien.id);
-  }
+  // /**
+  //  * Elimina un bien de la posada
+  //  * @param bien - Bien a eliminar
+  //  */
+  // removeBien(bien: Bien) {
+  //   this._bienes = this._bienes.filter(b => b.id !== bien.id);
+  // }
 
-  /**
-   * Añade un mercader a la posada
-   * @param mercader - Mercader a añadir
-   */
-  addMercader(mercader: Mercader) {
-    this._mercaderes.push(mercader);
-  }
+  // /**
+  //  * Añade un mercader a la posada
+  //  * @param mercader - Mercader a añadir
+  //  */
+  // addMercader(mercader: Mercader) {
+  //   this._mercaderes.push(mercader);
+  // }
 
-  /**
-   * Elimina un mercader de la posada
-   * @param mercader - Mercader a eliminar
-   */
-  removeMercader(mercader: Mercader) {
-    this._mercaderes = this._mercaderes.filter(merc => merc.id !== mercader.id);
-  }
+  // /**
+  //  * Elimina un mercader de la posada
+  //  * @param mercader - Mercader a eliminar
+  //  */
+  // removeMercader(mercader: Mercader) {
+  //   this._mercaderes = this._mercaderes.filter(merc => merc.id !== mercader.id);
+  // }
 
-  /**
-   * Añade un cliente a la posada
-   * @param cliente - Cliente a añadir
-   */
-  addCliente(cliente: Cliente) {
-    this._clientes.push(cliente);
-  }
+  // /**
+  //  * Añade un cliente a la posada
+  //  * @param cliente - Cliente a añadir
+  //  */
+  // addCliente(cliente: Cliente) {
+  //   this._clientes.push(cliente);
+  // }
 
-  /**
-   * Elimina un cliente de la posada
-   * @param cliente - Cliente a eliminar
-   */
-  removeCliente(cliente: Cliente) {
-    this._clientes = this._clientes.filter(ccli => ccli.id !== cliente.id);
-  }
+  // /**
+  //  * Elimina un cliente de la posada
+  //  * @param cliente - Cliente a eliminar
+  //  */
+  // removeCliente(cliente: Cliente) {
+  //   this._clientes = this._clientes.filter(ccli => ccli.id !== cliente.id);
+  // }
 
   /**
    * Busca bienes por su nombre
@@ -99,7 +100,7 @@ export class Posada {
      * ESTRICTO
      * let bienes_encontrados = this._bienes.filter(bien => bien.name === name);
      */
-    return (this._bienes.filter((bien) => bien.name.includes(name)));
+    return ((this._bienes.bienes.filter((bien) => bien.name.includes(name))));
   }
 
   /**
@@ -112,7 +113,7 @@ export class Posada {
      * ESTRICTO
      * let bienes_encontrados = this._bienes.filter(bien => bien.material === material);
      */
-    return (this._bienes.filter((bien) => bien.material.includes(material)));
+    return (this._bienes.bienes.filter((bien) => bien.material.includes(material)));
   }
 
   /**
@@ -125,7 +126,7 @@ export class Posada {
      * ESTRICTO
      * let bienes_encontrados = this._bienes.filter(bien => bien.description === description);
      */
-    return (this._bienes.filter(bien => bien.description.includes(description)));
+    return (this._bienes.bienes.filter(bien => bien.description.includes(description)));
   }
 
   /**
@@ -134,7 +135,7 @@ export class Posada {
    * @returns Array de bienes ordenados por su precio de forma ascendente
    */
   sortBienesByPriceAsc(Bienes: Bien[]): Bien[] {
-    return (Bienes.sort((a, b) => a.price - b.price));
+    return (Bienes.toSorted((a, b) => a.price - b.price));
   }
 
   /**
@@ -143,7 +144,7 @@ export class Posada {
    * @returns Array de bienes ordenados por su precio de forma descendente
    */
   sortBienesByPriceDes(Bienes: Bien[]): Bien[] {
-    return (Bienes.sort((a, b) => b.price - a.price)).reverse();
+    return (Bienes.toSorted((a, b) => a.price - b.price)).reverse();
   }
 
   /**
@@ -152,7 +153,7 @@ export class Posada {
    * @returns Array de bienes ordenados alfabéticamente de forma ascendente
    */
   sortBienesAlphabeticallyAsc(Bienes: Bien[]): Bien[] {
-    return (Bienes.sort((a, b) => a.name.localeCompare(b.name)));
+    return (Bienes.toSorted((a, b) => a.name.localeCompare(b.name)));
   }
 
   /**
@@ -161,7 +162,7 @@ export class Posada {
    * @returns Array de bienes ordenados alfabéticamente de forma descendente
    */
   sortBienesAlphabeticallyDes(Bienes: Bien[]): Bien[] {
-    return (Bienes.sort((a, b) => a.name.localeCompare(b.name))).reverse();
+    return (Bienes.toSorted((a, b) => a.name.localeCompare(b.name))).reverse();
   }
 
   /**
@@ -170,7 +171,7 @@ export class Posada {
    * @returns Array de mercaderes con el nombre buscado
    */
   findMercaderByName(name: string): Mercader[] {
-    return (this.mercaderes.filter(merc => merc.name.includes(name)));
+    return (this.mercaderes.mercaderes.filter(merc => merc.name.includes(name)));
   }
 
   /**
@@ -179,7 +180,7 @@ export class Posada {
    * @returns Array de mercaderes con el tipo buscado
    */
   findMercaderByType(type: Tipo_mercader): Mercader[] {
-    return (this.mercaderes.filter(merc => merc.type.includes(type)));
+    return (this.mercaderes.mercaderes.filter(merc => merc.type.includes(type)));
   }
 
   /**
@@ -188,7 +189,7 @@ export class Posada {
    * @returns Array de mercaderes con la ubicación buscada
    */
   findMercaderByLocation(location: Ubicacion): Mercader[] {
-    return (this.mercaderes.filter(merc => merc.location.includes(location)));
+    return (this.mercaderes.mercaderes.filter(merc => merc.location.includes(location)));
   }
 
   /**
@@ -197,7 +198,7 @@ export class Posada {
    * @returns Array de clientes con el nombre buscado
    */
   findClienteByName(name:string): Cliente[] {
-    return (this.clientes.filter(cli => cli.name.includes(name)));
+    return (this.clientes.clientes.filter(cli => cli.name.includes(name)));
   }
 
   /**
@@ -206,7 +207,7 @@ export class Posada {
    * @returns Array de clientes con la raza buscada
    */
   findClienteByRace(race: Raza): Cliente[] {
-    return (this.clientes.filter(cli => cli.race.includes(race)));
+    return (this.clientes.clientes.filter(cli => cli.race.includes(race)));
   }
 
   /**
@@ -215,6 +216,6 @@ export class Posada {
    * @returns Array de clientes con la ubicación buscada
    */
   findClienteByLocation(location: Ubicacion): Cliente[] {
-    return (this.clientes.filter(cli => cli.location.includes(location)));
+    return (this.clientes.clientes.filter(cli => cli.location.includes(location)));
   }
 }

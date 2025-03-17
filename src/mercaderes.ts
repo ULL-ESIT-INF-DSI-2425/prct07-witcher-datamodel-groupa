@@ -10,7 +10,7 @@ export type Ubicacion = "Novigrad" | "Velen" | "Skellige" | "Kaer Morhen" | "Tor
 /**
  * Interfaz de un mercader
  */
-export interface Mercader {
+export interface Mercaderes {
     id: number;
     name: string;
     type: Tipo_mercader;
@@ -20,7 +20,7 @@ export interface Mercader {
 /**
  * Clase que representa un mercader
  */
-export class Mercaderes implements Mercader {
+export class Mercader implements Mercaderes {
   private _id: number;
   private _name: string;
   private _type: Tipo_mercader;

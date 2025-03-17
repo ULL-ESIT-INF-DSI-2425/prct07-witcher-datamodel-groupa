@@ -1,8 +1,8 @@
-import { Ubicacion } from "./mercaderes";
+import { Ubicacion } from "./mercaderes.js";
 /**
  * Tipo que contiene las posibles razas de los clientes
  */
-export type Raza = "Humano" | "Elfo" | "Enano" | "Hechicero"
+export type Raza = "Humano" | "Elfo" | "Enano" | "Brujo"
 
 /**
  * Interfaz de un cliente

@@ -1,75 +1,107 @@
 import { Bien } from './bienes';
-import { Mercader } from './mercaderes';
+import { Mercader as Mercader } from './mercaderes';
 import { Cliente } from './clientes';
 
-class BienesCollections implements Bien {
-  private _bienes: Bien[];
+/**
+ * Clase que representa una colección de bienes
+ */
+export class BienesCollections {
+  private _list: Bien[];
 
   constructor(bienes: Bien[]) {
-    this._bienes = bienes;
+    this._list = bienes;
   }
 
   get bienes(): Bien[] {
-    return this._bienes;
+    return this._list;
   }
 
   set bienes(bienes: Bien[]) {
-    this._bienes = bienes;
+    this._list = bienes;
   }
 
+  /**
+   * Añade un bien a la colección
+   * @param bien - Bien a añadir
+   */
   addBien(bien: Bien) {
-    this._bienes.push(bien);
+    this._list.push(bien);
   }
 
+  /**
+   * Elimina un bien de la colección
+   * @param bien - Bien a eliminar
+   */
   removeBien(bien: Bien) {
-    this._bienes = this._bienes.filter(b => b.id !== bien.id);
+    this._list = this._list.filter(b => b.id !== bien.id);
   }
 }
 
-class MercaderCollections implements Mercader {
-  private _mercaderes: Mercader[];
+/**
+ * Clase que representa una colección de mercaderes
+ */
+export class MercaderCollections {
+  private _list: Mercader[];
 
   constructor(mercaderes: Mercader[]) {
-    this._mercaderes = mercaderes;
+    this._list = mercaderes;
   }
 
   get mercaderes(): Mercader[] {
-    return this._mercaderes;
+    return this._list;
   }
 
   set mercaderes(mercaderes: Mercader[]) {
-    this._mercaderes = mercaderes;
+    this._list = mercaderes;
   }
 
+  /**
+   * Añade un mercader a la colección
+   * @param mercader - Mercader a añadir
+   */
   addMercader(mercader: Mercader) {
-    this._mercaderes.push(mercader);
+    this._list.push(mercader);
   }
 
+  /**
+   * Elimina un mercader de la colección
+   * @param mercader - Mercader a eliminar
+   */
   removeMercader(mercader: Mercader) {
-    this._mercaderes = this._mercaderes.filter(m => m.id !== mercader.id);
+    this._list = this._list.filter(m => m.id !== mercader.id);
   }
 }
-
-class ClienteCollections implements Cliente {
-  private _clientes: Cliente[];
+/**
+ * Clase que representa una colección de clientes
+ */
+export class ClienteCollections {
+  private _list: Cliente[];
 
   constructor(clientes: Cliente[]) {
-    this._clientes = clientes;
+    this._list = clientes;
   }
 
   get clientes(): Cliente[] {
-    return this._clientes;
+    return this._list;
   }
 
   set clientes(clientes: Cliente[]) {
-    this._clientes = clientes;
+    this._list = clientes;
   }
 
+  /**
+   * Añade un cliente a la colección
+   * @param cliente - Cliente a añadir
+   */
   addCliente(cliente: Cliente) {
-    this._clientes.push(cliente);
+    this._list.push(cliente);
   }
 
+  /**
+   * Elimina un cliente de la colección
+   * @param cliente - Cliente a eliminar
+   */
   removeCliente(cliente: Cliente) {
-    this._clientes = this._clientes.filter(c => c.id !== cliente.id);
+    this._list = this._list.filter(c => c.id !== cliente.id);
   }
 }
