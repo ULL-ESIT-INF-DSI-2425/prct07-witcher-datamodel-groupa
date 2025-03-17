@@ -5,8 +5,9 @@
   "scripts": {
     "start": "tsc-watch --onSuccess \"node dist/ejercicio-mod.js\"",
     "test": "vitest run",
-    "coverage": "vitest run --coverage --coverage.include src/ejercicio-mod.ts",
-    "doc": "npx typedoc --entryPointStrategy Expand src"
+    "coverage": "vitest run --coverage --coverage.include src/",
+    "doc": "npx typedoc --entryPointStrategy Expand src",
+    "prettier": "prettier --write ."
   },
   "keywords": [],
   "author": "",
