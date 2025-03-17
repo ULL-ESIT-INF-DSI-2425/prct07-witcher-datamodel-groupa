@@ -55,7 +55,7 @@ export class Cliente implements Clientes {
   }
 
   set race(race: Raza) {
-    this._race;
+    this._race = race;
   }
 
   set location(location: Ubicacion) {
