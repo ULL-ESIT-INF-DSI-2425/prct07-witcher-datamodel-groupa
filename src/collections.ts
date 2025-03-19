@@ -5,7 +5,7 @@ import { Cliente } from './clientes';
 /**
  * Clase que representa una colección de bienes
  */
-export class BienesCollections {
+export class BienCollections {
   private _list: Bien[];
 
   constructor(bienes: Bien[]) {

@@ -1,24 +1,23 @@
-
 import { Bien } from "./bienes.js";
 import { Mercader, Ubicacion, Tipo_mercader } from "./mercaderes.js";
-import { BienesCollections, MercaderCollections, ClienteCollections } from "./collections.js";
+import { BienCollections, MercaderCollections, ClienteCollections } from "./collections.js";
  import { Cliente, Raza } from "./clientes.js";
 
 /**
  * Clase que representa una posada
  */
 export class Posada {
-  private _bienes: BienesCollections;
+  private _bienes: BienCollections;
   private _mercaderes: MercaderCollections;
   private _clientes: ClienteCollections;
   
-  constructor(bienes: BienesCollections, mercaderes: MercaderCollections, clientes: ClienteCollections) {
+  constructor(bienes: BienCollections, mercaderes: MercaderCollections, clientes: ClienteCollections) {
     this._bienes = bienes;
     this._mercaderes = mercaderes;
     this._clientes = clientes;
   }
   
-  get bienes(): BienesCollections {
+  get bienes(): BienCollections {
     return this._bienes;
   }
 
@@ -30,7 +29,7 @@ export class Posada {
     return this._clientes;
   }
 
-  set bienes(bienes: BienesCollections) {
+  set bienes(bienes: BienCollections) {
     this._bienes = bienes;
   }
 
@@ -134,8 +133,8 @@ export class Posada {
    * @param Bienes - Array de bienes a ordenar
    * @returns Array de bienes ordenados por su precio de forma ascendente
    */
-  sortBienesByPriceAsc(Bienes: Bien[]): Bien[] {
-    return (Bienes.toSorted((a, b) => a.price - b.price));
+  sortBienesByPriceAsc(): Bien[] {
+    return (this._bienes.bienes.toSorted((a, b) => a.price - b.price));
   }
 
   /**
@@ -143,8 +142,8 @@ export class Posada {
    * @param Bienes - Array de bienes a ordenar
    * @returns Array de bienes ordenados por su precio de forma descendente
    */
-  sortBienesByPriceDes(Bienes: Bien[]): Bien[] {
-    return (Bienes.toSorted((a, b) => a.price - b.price)).reverse();
+  sortBienesByPriceDes(): Bien[] {
+    return (this._bienes.bienes.toSorted((a, b) => a.price - b.price).reverse());
   }
 
   /**
@@ -152,8 +151,8 @@ export class Posada {
    * @param Bienes - Array de bienes a ordenar
    * @returns Array de bienes ordenados alfabéticamente de forma ascendente
    */
-  sortBienesAlphabeticallyAsc(Bienes: Bien[]): Bien[] {
-    return (Bienes.toSorted((a, b) => a.name.localeCompare(b.name)));
+  sortBienesAlphabeticallyAsc(): Bien[] {
+    return (this._bienes.bienes.toSorted((a, b) => a.name.localeCompare(b.name)));
   }
 
   /**
@@ -161,8 +160,8 @@ export class Posada {
    * @param Bienes - Array de bienes a ordenar
    * @returns Array de bienes ordenados alfabéticamente de forma descendente
    */
-  sortBienesAlphabeticallyDes(Bienes: Bien[]): Bien[] {
-    return (Bienes.toSorted((a, b) => a.name.localeCompare(b.name))).reverse();
+  sortBienesAlphabeticallyDes(): Bien[] {
+    return (this._bienes.bienes.toSorted((a, b) => a.name.localeCompare(b.name))).reverse();
   }
 
   /**
