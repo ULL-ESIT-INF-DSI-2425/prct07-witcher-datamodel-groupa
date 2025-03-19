@@ -130,7 +130,6 @@ export class Posada {
 
   /**
    * Ordena bienes por precio de forma ascendente
-   * @param Bienes - Array de bienes a ordenar
    * @returns Array de bienes ordenados por su precio de forma ascendente
    */
   sortBienesByPriceAsc(): Bien[] {
@@ -139,7 +138,6 @@ export class Posada {
 
   /**
    * Ordena bienes por precio de forma descendente
-   * @param Bienes - Array de bienes a ordenar
    * @returns Array de bienes ordenados por su precio de forma descendente
    */
   sortBienesByPriceDes(): Bien[] {
@@ -148,7 +146,6 @@ export class Posada {
 
   /**
    * Ordena bienes alfabéticamente de forma ascendente
-   * @param Bienes - Array de bienes a ordenar
    * @returns Array de bienes ordenados alfabéticamente de forma ascendente
    */
   sortBienesAlphabeticallyAsc(): Bien[] {
@@ -157,7 +154,6 @@ export class Posada {
 
   /**
    * Ordena bienes alfabéticamente de forma descendente
-   * @param Bienes - Array de bienes a ordenar
    * @returns Array de bienes ordenados alfabéticamente de forma descendente
    */
   sortBienesAlphabeticallyDes(): Bien[] {
