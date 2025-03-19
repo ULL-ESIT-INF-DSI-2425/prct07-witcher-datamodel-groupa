@@ -1,12 +1,27 @@
 /**
  * Tipo que recoge los posibles tipos de mercaderes
  */
-export type Tipo_mercader = "Herrero"| "Alquimista" | "General" | "Joyero" | "Druida"
+export const Tipo_mercader = {
+  HERRERO: "Herrero",
+  ALQUIMISTA: "Alquimista",
+  GENERAL: "General",
+  JOYERO: "Joyero",
+  DRUIDA: "Druida"
+} as const;
+
+export type Tipo_mercader = typeof Tipo_mercader[keyof typeof Tipo_mercader];
 /**
  * Tipo que contiene las posibles ubicaciones de los mercaderes
  */
-export type Ubicacion = "Novigrad" | "Velen" | "Skellige" | "Kaer Morhen" | "Torremolinos"
+export const Ubicacion = {
+  NOVIGRAD: "Novigrad",
+  VELEN: "Velen",
+  SKELLIGE: "Skellige",
+  KAER_MORHEN: "Kaer Morhen",
+  TORREMOLINOS: "Torremolinos"
+} as const;
 
+export type Ubicacion = typeof Ubicacion[keyof typeof Ubicacion];
 /**
  * Interfaz de un mercader
  */

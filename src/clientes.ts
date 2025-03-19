@@ -2,8 +2,14 @@ import { Ubicacion } from "./mercaderes.js";
 /**
  * Tipo que contiene las posibles razas de los clientes
  */
-export type Raza = "Humano" | "Elfo" | "Enano" | "Brujo"
+export const Raza = {
+  HUMANO: "Humano",
+  ELFO: "Elfo",
+  ENANO: "Enano",
+  BRUJO: "Brujo"
+} as const;
 
+export type Raza = typeof Raza[keyof typeof Raza];
 /**
  * Interfaz de un cliente
  */
