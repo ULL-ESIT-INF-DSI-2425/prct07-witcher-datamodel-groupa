@@ -134,7 +134,7 @@ export class Posada {
    * @returns Array de bienes ordenados por su precio de forma ascendente
    */
   sortBienesByPriceAsc(): Bien[] {
-    return (this._bienes.bienes.toSorted((a, b) => a.price - b.price));
+    return (this._bienes.bienes.sort((a, b) => a.price - b.price));
   }
 
   /**
@@ -143,7 +143,7 @@ export class Posada {
    * @returns Array de bienes ordenados por su precio de forma descendente
    */
   sortBienesByPriceDes(): Bien[] {
-    return (this._bienes.bienes.toSorted((a, b) => a.price - b.price).reverse());
+    return (this._bienes.bienes.sort((a, b) => a.price - b.price).reverse());
   }
 
   /**
@@ -152,7 +152,7 @@ export class Posada {
    * @returns Array de bienes ordenados alfabéticamente de forma ascendente
    */
   sortBienesAlphabeticallyAsc(): Bien[] {
-    return (this._bienes.bienes.toSorted((a, b) => a.name.localeCompare(b.name)));
+    return (this._bienes.bienes.sort((a, b) => a.name.localeCompare(b.name)));
   }
 
   /**
@@ -161,7 +161,7 @@ export class Posada {
    * @returns Array de bienes ordenados alfabéticamente de forma descendente
    */
   sortBienesAlphabeticallyDes(): Bien[] {
-    return (this._bienes.bienes.toSorted((a, b) => a.name.localeCompare(b.name))).reverse();
+    return (this._bienes.bienes.sort((a, b) => a.name.localeCompare(b.name))).reverse();
   }
 
   /**

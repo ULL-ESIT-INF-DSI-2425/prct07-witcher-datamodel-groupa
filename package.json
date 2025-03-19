@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/ULL-ESIT-INF-DSI-2425/prct07-witcher-datamodel-groupa#readme",
   "dependencies": {
-    "inquirer": "^12.4.3",
+    "inquirer": "^12.5.0",
     "lowdb": "^7.0.1"
   }
 }
