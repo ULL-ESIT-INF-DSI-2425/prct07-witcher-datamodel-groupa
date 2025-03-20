@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 import { Posada } from "./posada.js";
 import { Cliente } from "./clientes.js";
-import { Mercader } from "./mercaderes.js";
+import { Mercader, Tipo_mercader, Ubicacion } from "./mercaderes.js";
 import { Bien } from "./bienes.js";
 import { BienCollections, MercaderCollections, ClienteCollections } from "./collections.js";
 
@@ -12,8 +12,8 @@ import { BienCollections, MercaderCollections, ClienteCollections } from "./coll
     const bien = new Bien(1, 'Espada', 'Espada de acero maldita', 'Acero de Mahakam' , 2, 250);
     const bien2 = new Bien(2, 'Yelmo', 'Yelmo de cota de malla', 'Cota de malla', 10, 500);
     const bien_collection = new BienCollections([bien, bien2]);
-    const mercader = new Mercader(1, "Andre", "Herrero", "Skellige");
-    const mercader2 = new Mercader(2, "Roshi", "Druida", "Kaer Morhen");
+    const mercader = new Mercader(1, "Andre", Tipo_mercader.HERRERO, Ubicacion.SKELLIGE);
+    const mercader2 = new Mercader(2, "Roshi", Tipo_mercader.DRUIDA, Ubicacion.KAER_MORHEN);
     const mercader_collection = new MercaderCollections([mercader, mercader2]);
     const cliente = new Cliente(1, 'Geralt', 'Brujo', 'Torremolinos');
     const cliente2 = new Cliente(2, 'Vicente', 'Enano', 'Novigrad' );
@@ -265,7 +265,156 @@ console.log("Se ha borrado el Bien que ha escrito. \n");
 await main();
 }
 
+async function menu_mercaderes() {
+  console.log("Ha entrado en los Mercaderes.\n");
+  inquirer.prompt([
+  {
+    type:"list",
+    name:"Opcion_mercaderes",
+    message: "¿Qué desea hacer con los mercaderes?:",
+    choices: ["Añadir", "Eliminar", "Modificar", "Localizar mercaderes específicos"],
+  }]).then(async (respuesta) => {
+  switch (respuesta.Opcion_mercaderes) {
+    case "Añadir":
+      await addMercader();
+      break;
+    case "Eliminar":
+      await DeleteMercader();
+      break;
+    case "Modificar":
+      break;
+    case "Localizar mercaderes específicos":
+      await consulta_Mercaderes();
+      break;
+  }
+  })
+}
 
+async function addMercader() {
+  const answers = await inquirer.prompt([
+    {
+        type: 'input',
+        name: 'uid',
+        message: '¿UID del Mercader a añadir?',
+    },
+    {
+       type: 'input',
+       name: 'name',
+       message: '¿Como se llama el mercader nuevo que va introducir?',
+    },
+    {
+       type: 'list',
+       name: 'Tipo',
+       message: '¿Ha qué se dedica el nuevo mercader?:',
+       choices: [Tipo_mercader.ALQUIMISTA, Tipo_mercader.DRUIDA, Tipo_mercader.GENERAL, Tipo_mercader.HERRERO, Tipo_mercader.JOYERO],
+    },
+    {
+       type: 'list',
+       name: 'Ubicacion',
+       message: '¿De dónde viene el nuevo mercader?:',
+       choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN],
+    },
+]);
+const nuevo_mercader = new Mercader(answers.uid, answers.name, answers.Tipo, answers.Ubicacion);
+posada.mercaderes.addMercader(nuevo_mercader);
+console.log("Se ha añadido al Mercader satisfactoriamente.\n");
+// vuelve a lanzar el menú
+await main();
+}
+
+async function DeleteMercader() {
+  const answers = await inquirer.prompt([
+    {
+        type: 'input',
+        name: 'uid',
+        message: '¿UID del Mercader a añadir?',
+    },
+    {
+       type: 'input',
+       name: 'name',
+       message: '¿Como se llama el mercader nuevo que va introducir?',
+    },
+    {
+       type: 'list',
+       name: 'Tipo',
+       message: '¿Ha qué se dedica el nuevo mercader?:',
+       choices: [Tipo_mercader.ALQUIMISTA, Tipo_mercader.DRUIDA, Tipo_mercader.GENERAL, Tipo_mercader.HERRERO, Tipo_mercader.JOYERO],
+    },
+    {
+       type: 'list',
+       name: 'Ubicacion',
+       message: '¿De dónde viene el nuevo mercader?:',
+       choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN],
+    },
+]);
+const nuevo_mercader = new Mercader(answers.uid, answers.name, answers.Tipo, answers.Ubicacion);
+posada.mercaderes.removeMercader(nuevo_mercader);
+console.log("Se ha borrado al Mercader satisfactoriamente.\n");
+// vuelve a lanzar el menú
+await main();
+}
+
+async function consulta_Mercaderes() {
+  console.log("Ha entrado en el menú de la consulta de Mercaderes.\n");
+  inquirer.prompt([
+  {
+    type:"list",
+    name:"Opcion_consulta",
+    message: "¿Cómo desea consultar sus Mercaderes?:",
+    choices: ["Nombre", "Tipo", "Ubicación"],
+  }]).then(async (respuesta) => {
+  switch (respuesta.Opcion_consulta) {
+    case "Nombre":
+      await consulta_nombre_mercader();
+      break;
+    case "Tipo":
+      await consulta_tipo_mercader();
+      break;
+    case "Ubicación":
+      await consulta_ubicacion_mercader();
+      break;
+  }
+  })
+}
+
+async function consulta_nombre_mercader() {
+  const respuesta: {nombre: string} = await inquirer.prompt([
+  {
+    type: "input",
+    name: "nombre",
+    message: "¿Qué nombre de mercader desea buscar?:",
+  }])
+  let aux: string = respuesta.nombre;
+  let resultado: Mercader[] = posada.findMercaderByName(aux);
+  console.log(resultado);
+  await main();
+}
+
+async function consulta_tipo_mercader() {
+  const respuesta: {Tipo: Tipo_mercader} = await inquirer.prompt([
+  {
+    type: "list",
+    name: "Tipo",
+    message: "¿Qué tipo de oficio quiere buscar entre sus mercaderes?:",
+    choices: [Tipo_mercader.ALQUIMISTA, Tipo_mercader.DRUIDA, Tipo_mercader.GENERAL, Tipo_mercader.HERRERO, Tipo_mercader.JOYERO],
+  }])
+  let resultado: Mercader[] = posada.findMercaderByName(respuesta.Tipo);
+  console.log(resultado);
+  await main();
+}
+
+async function consulta_ubicacion_mercader() {
+  const respuesta: {Ubicación: Ubicacion} = await inquirer.prompt([
+    {
+      type: "list",
+      name: "Ubicación",
+      message: "¿De qué lugar quiere filtrar sus mercaderes?:",
+      choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN],
+    }])
+    let resultado: Mercader[] = posada.findMercaderByName(respuesta.Ubicación);
+    console.log(resultado);
+    await main();
+}
 
 // Opciones del menú
 async function main() {
@@ -282,7 +431,7 @@ async function main() {
           await menu_Bienes();
           break;
         case "Mercaderes":
-          console.log("Ha accedido a los Mercaderes");
+          await menu_mercaderes();
           break;
         case "Clientes":
           console.log("Ha accedido al listado de clientes");
