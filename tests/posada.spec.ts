@@ -92,30 +92,30 @@ describe('Posada', () => {
     });
 
     test('SORT BIEN BY PRICE ASC', () => {
-        expect(posada2.sortBienesByPriceAsc()).toEqual([bien2, bien]);
+        expect(posada2.sortBienesByPriceAsc([bien, bien2])).toEqual([bien2, bien]);
         posada2.bienes.addBien(bien3);
-        expect(posada2.sortBienesByPriceAsc()).toEqual([bien2, bien, bien3]);
+        expect(posada2.sortBienesByPriceAsc([bien2, bien, bien3])).toEqual([bien2, bien, bien3]);
         posada2.bienes.removeBien(bien3);
     });
 
     test('SORT BIEN BY PRICE DESC', () => {
-        expect(posada2.sortBienesByPriceDes()).toEqual([bien, bien2]);
+        expect(posada2.sortBienesByPriceDes([bien2, bien])).toEqual([bien, bien2]);
         posada2.bienes.addBien(bien3);
-        expect(posada2.sortBienesByPriceDes()).toEqual([bien3, bien, bien2]);
+        expect(posada2.sortBienesByPriceDes([bien2, bien, bien3])).toEqual([bien3, bien, bien2]);
         posada2.bienes.removeBien(bien3);
     });
 
     test('SORT BIEN ALPHABETICALLY ASC', () => {
-        expect(posada2.sortBienesAlphabeticallyAsc()).toEqual([bien2, bien]);
+        expect(posada2.sortBienesAlphabeticallyAsc([bien, bien2])).toEqual([bien2, bien]);
         posada2.bienes.addBien(bien3);
-        expect(posada2.sortBienesAlphabeticallyAsc()).toEqual([bien2, bien, bien3]);
+        expect(posada2.sortBienesAlphabeticallyAsc([bien, bien2, bien3])).toEqual([bien2, bien, bien3]);
         posada2.bienes.removeBien(bien3);
     });
 
     test('SORT BIEN ALPHABETICALLY DESC', () => {
-        expect(posada2.sortBienesAlphabeticallyDes()).toEqual([bien, bien2]);
+        expect(posada2.sortBienesAlphabeticallyDes([bien, bien2])).toEqual([bien, bien2]);
         posada2.bienes.addBien(bien3);
-        expect(posada2.sortBienesAlphabeticallyDes()).toEqual([bien3, bien, bien2]);
+        expect(posada2.sortBienesAlphabeticallyDes([bien, bien2, bien3])).toEqual([bien3, bien, bien2]);
         posada2.bienes.removeBien(bien3);
     });
 

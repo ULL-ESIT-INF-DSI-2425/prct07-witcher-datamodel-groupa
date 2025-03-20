@@ -5,6 +5,7 @@
     "./dist"
   ],
     "compilerOptions": {
+    "moduleResolution": "Node",
     "target": "ES2024",
     "module": "ES6",
     "rootDir": "./src",

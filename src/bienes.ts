@@ -1,3 +1,4 @@
+
 /**
  * Interfaz de un bien
  */

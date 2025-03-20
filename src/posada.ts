@@ -132,32 +132,32 @@ export class Posada {
    * Ordena bienes por precio de forma ascendente
    * @returns Array de bienes ordenados por su precio de forma ascendente
    */
-  sortBienesByPriceAsc(): Bien[] {
-    return (this._bienes.bienes.sort((a, b) => a.price - b.price));
+  sortBienesByPriceAsc(Bienes: Bien[]): Bien[] {
+    return (Bienes.sort((a, b) => a.price - b.price));
   }
 
   /**
    * Ordena bienes por precio de forma descendente
    * @returns Array de bienes ordenados por su precio de forma descendente
    */
-  sortBienesByPriceDes(): Bien[] {
-    return (this._bienes.bienes.sort((a, b) => a.price - b.price).reverse());
+  sortBienesByPriceDes(Bienes: Bien[]): Bien[] {
+    return (Bienes.sort((a, b) => a.price - b.price)).reverse();
   }
 
   /**
    * Ordena bienes alfabéticamente de forma ascendente
    * @returns Array de bienes ordenados alfabéticamente de forma ascendente
    */
-  sortBienesAlphabeticallyAsc(): Bien[] {
-    return (this._bienes.bienes.sort((a, b) => a.name.localeCompare(b.name)));
+  sortBienesAlphabeticallyAsc(Bienes: Bien[]): Bien[] {
+    return (Bienes.sort((a, b) => a.name.localeCompare(b.name)));
   }
 
   /**
    * Ordena bienes alfabéticamente de forma descendente
    * @returns Array de bienes ordenados alfabéticamente de forma descendente
    */
-  sortBienesAlphabeticallyDes(): Bien[] {
-    return (this._bienes.bienes.sort((a, b) => a.name.localeCompare(b.name))).reverse();
+  sortBienesAlphabeticallyDes(Bienes: Bien[]): Bien[] {
+    return (Bienes.sort((a, b) => a.name.localeCompare(b.name))).reverse();
   }
 
   /**
