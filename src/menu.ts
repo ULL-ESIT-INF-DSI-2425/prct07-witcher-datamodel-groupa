@@ -1,6 +1,6 @@
 import inquirer from "inquirer";
 import { Posada } from "./posada.js";
-import { Cliente } from "./clientes.js";
+import { Cliente, Raza } from "./clientes.js";
 import { Mercader, Tipo_mercader, Ubicacion } from "./mercaderes.js";
 import { Bien } from "./bienes.js";
 import { BienCollections, MercaderCollections, ClienteCollections } from "./collections.js";
@@ -221,7 +221,7 @@ async function addBien() {
 ]);
 const nuevo_bien = new Bien(answers.uid, answers.name, answers.Descripcion, answers.Material, answers.Peso, answers.Precio);
 posada.bienes.addBien(nuevo_bien);
-console.log("Se ha añadido el bien satisfactoriamente.\n");
+console.log("Se ha añadido el Bien satisfactoriamente.\n");
 // vuelve a lanzar el menú
 await main();
 }
@@ -327,28 +327,28 @@ async function DeleteMercader() {
     {
         type: 'input',
         name: 'uid',
-        message: '¿UID del Mercader a añadir?',
+        message: '¿UID del Mercader a borrar?',
     },
     {
        type: 'input',
        name: 'name',
-       message: '¿Como se llama el mercader nuevo que va introducir?',
+       message: '¿Como se llama el mercader que va a borrar?',
     },
     {
        type: 'list',
        name: 'Tipo',
-       message: '¿Ha qué se dedica el nuevo mercader?:',
+       message: '¿Ha qué se dedica el mercader?:',
        choices: [Tipo_mercader.ALQUIMISTA, Tipo_mercader.DRUIDA, Tipo_mercader.GENERAL, Tipo_mercader.HERRERO, Tipo_mercader.JOYERO],
     },
     {
        type: 'list',
        name: 'Ubicacion',
-       message: '¿De dónde viene el nuevo mercader?:',
+       message: '¿De dónde viene el mercader?:',
        choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN],
     },
 ]);
-const nuevo_mercader = new Mercader(answers.uid, answers.name, answers.Tipo, answers.Ubicacion);
-posada.mercaderes.removeMercader(nuevo_mercader);
+const mercader_a_borrar = new Mercader(answers.uid, answers.name, answers.Tipo, answers.Ubicacion);
+posada.mercaderes.removeMercader(mercader_a_borrar);
 console.log("Se ha borrado al Mercader satisfactoriamente.\n");
 // vuelve a lanzar el menú
 await main();
@@ -397,23 +397,173 @@ async function consulta_tipo_mercader() {
     name: "Tipo",
     message: "¿Qué tipo de oficio quiere buscar entre sus mercaderes?:",
     choices: [Tipo_mercader.ALQUIMISTA, Tipo_mercader.DRUIDA, Tipo_mercader.GENERAL, Tipo_mercader.HERRERO, Tipo_mercader.JOYERO],
-  }])
-  let resultado: Mercader[] = posada.findMercaderByName(respuesta.Tipo);
+  }]);
+  let resultado: Mercader[] = posada.findMercaderByType(respuesta.Tipo);
   console.log(resultado);
   await main();
 }
 
 async function consulta_ubicacion_mercader() {
   const respuesta: {Ubicación: Ubicacion} = await inquirer.prompt([
+  {
+    type: "list",
+    name: "Ubicación",
+    message: "¿De qué lugar quiere filtrar sus mercaderes?:",
+    choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN],
+  }]);
+  let resultado: Mercader[] = posada.findMercaderByLocation(respuesta.Ubicación);
+  console.log(resultado);
+  await main();
+}
+
+async function menu_clientes() {
+  console.log("Ha entrado en los Clientes.\n");
+  inquirer.prompt([
+  {
+    type:"list",
+    name:"Opcion_clientes",
+    message: "¿Qué desea hacer con los clientes?:",
+    choices: ["Añadir", "Eliminar", "Modificar", "Localizar clientes específicos"],
+  }]).then(async (respuesta) => {
+  switch (respuesta.Opcion_clientes) {
+    case "Añadir":
+      await addClientes();
+      break;
+    case "Eliminar":
+      await DeleteClientes();
+      break;
+    case "Modificar":
+      break;
+    case "Localizar mercaderes específicos":
+      await consulta_Clientes();
+      break;
+  }
+  })
+}
+
+async function addClientes() {
+  const answers = await inquirer.prompt([
+  {
+    type: 'input',
+    name: 'uid',
+    message: '¿UID del Cliente a añadir?',
+  },
+  {
+    type: 'input',
+    name: 'name',
+    message: '¿Como se llama el cliente nuevo que va introducir?',
+  },
+  {
+    type: 'list',
+    name: 'Raza',
+    message: '¿De qué raza es el nuevo cliente?:',
+    choices: [Raza.BRUJO, Raza.ELFO, Raza.ENANO, Raza.HUMANO],
+  },
+  {
+    type: 'list',
+    name: 'Ubicacion',
+    message: '¿De dónde viene el nuevo cliente?:',
+    choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN],
+  },
+]);
+const nuevo_cliente = new Cliente(answers.uid, answers.name, answers.Raza, answers.Ubicacion);
+posada.clientes.addCliente(nuevo_cliente);
+console.log("Se ha añadido al cliente satisfactoriamente.\n");
+// vuelve a lanzar el menú
+await main();
+}
+
+async function DeleteClientes() {
+  const answers = await inquirer.prompt([
     {
-      type: "list",
-      name: "Ubicación",
-      message: "¿De qué lugar quiere filtrar sus mercaderes?:",
+      type: 'input',
+      name: 'uid',
+      message: '¿UID del Cliente a borrar?',
+    },
+    {
+      type: 'input',
+      name: 'name',
+      message: '¿Como se llama el cliente que va a borrar?',
+    },
+    {
+      type: 'list',
+      name: 'Raza',
+      message: '¿De qué raza es el cliente?:',
+      choices: [Raza.BRUJO, Raza.ELFO, Raza.ENANO, Raza.HUMANO],
+    },
+    {
+      type: 'list',
+      name: 'Ubicacion',
+      message: '¿De dónde viene el cliente?:',
       choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN],
-    }])
-    let resultado: Mercader[] = posada.findMercaderByName(respuesta.Ubicación);
-    console.log(resultado);
-    await main();
+    },
+  ]);
+  const cliente_a_borrar = new Cliente(answers.uid, answers.name, answers.Raza, answers.Ubicacion);
+  posada.clientes.removeCliente(cliente_a_borrar);
+  console.log("Se ha borrado el Cliente satisfactoriamente.\n");
+  // vuelve a lanzar el menú
+  await main();
+}
+
+async function consulta_Clientes() {
+  console.log("Ha entrado en el menú de la consulta de Clientes.\n");
+  inquirer.prompt([
+  {
+    type:"list",
+    name:"Opcion_consulta",
+    message: "¿Cómo desea consultar sus Clientes?:",
+    choices: ["Nombre", "Raza", "Ubicación"],
+  }]).then(async (respuesta) => {
+  switch (respuesta.Opcion_consulta) {
+    case "Nombre":
+      await consulta_nombre_cliente();
+      break;
+    case "Raza":
+      await consulta_raza_cliente();
+      break;
+    case "Ubicación":
+      await consulta_ubicacion_cliente();
+      break;
+  }
+  })
+}
+
+async function consulta_nombre_cliente() {
+  const respuesta: {nombre: string} = await inquirer.prompt([
+  {
+    type: "input",
+    name: "nombre",
+    message: "¿Qué nombre quiere buscar entre los mercaderes?:",
+  }]);
+  let resultado: Cliente[] = posada.findClienteByName(respuesta.nombre);
+  console.log(resultado);
+  await main();
+}
+
+async function consulta_raza_cliente() {
+  const respuesta: {Raza: Raza} = await inquirer.prompt([
+  {
+    type: "list",
+    name: "Raza",
+    message: "¿En base a qué raza quiere filtrar sus clientes?:",
+    choices: [Raza.BRUJO, Raza.ELFO, Raza.ENANO, Raza.HUMANO],
+  }]);
+  let resultado: Cliente[] = posada.findClienteByRace(respuesta.Raza);
+  console.log(resultado);
+  await main();
+}
+
+async function consulta_ubicacion_cliente() {
+  const respuesta: {Ubicación: Ubicacion} = await inquirer.prompt([
+  {
+    type: "list",
+    name: "Ubicación",
+    message: "¿De qué lugar quiere filtrar sus clientes?:",
+    choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN],
+  }]);
+  let resultado: Cliente[] = posada.findClienteByLocation(respuesta.Ubicación);
+  console.log(resultado);
+  await main();
 }
 
 // Opciones del menú
@@ -434,7 +584,7 @@ async function main() {
           await menu_mercaderes();
           break;
         case "Clientes":
-          console.log("Ha accedido al listado de clientes");
+          await menu_clientes();
           break;
         case "Salir del sistema":
           console.log("Saliendo del sistema");
@@ -448,3 +598,7 @@ async function main() {
 
 // Ejecutar menú
 main();
+
+
+// compilar: npx tsc
+// ejecutar: node dist/menu.js
