@@ -434,7 +434,7 @@ async function menu_clientes() {
       break;
     case "Modificar":
       break;
-    case "Localizar mercaderes específicos":
+    case "Localizar clientes específicos":
       await consulta_Clientes();
       break;
   }
