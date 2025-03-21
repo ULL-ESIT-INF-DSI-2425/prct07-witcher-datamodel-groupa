@@ -32,8 +32,8 @@ export class BienCollections {
    * Elimina un bien de la colección
    * @param bien - Bien a eliminar
    */
-  removeBien(bien: Bien) {
-    this._list = this._list.filter(b => b.id !== bien.id);
+  removeBien(prop: number) {
+    this._list = this._list.filter(m => m.id !== prop);
   }
 }
 
@@ -67,8 +67,8 @@ export class MercaderCollections {
    * Elimina un mercader de la colección
    * @param mercader - Mercader a eliminar
    */
-  removeMercader(mercader: Mercader) {
-    this._list = this._list.filter(m => m.id !== mercader.id);
+  removeMercader(id: number) {
+    this._list = this._list.filter(m => m.id !== id);
   }
 }
 /**
@@ -101,7 +101,7 @@ export class ClienteCollections {
    * Elimina un cliente de la colección
    * @param cliente - Cliente a eliminar
    */
-  removeCliente(cliente: Cliente) {
-    this._list = this._list.filter(c => c.id !== cliente.id);
+  removeCliente(id: number) {
+    this._list = this._list.filter(c => c.id !== id);
   }
 }

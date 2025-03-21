@@ -1,28 +1,19 @@
 {
-  "bienes": [
-    {
-      "_id": 234,
-      "_name": "Batuta de los Vientos",
-      "_description": "Controla el viento mediante compases",
-      "_material": "Acero",
-      "_weight": 1,
-      "_price": 50000
-    }
-  ],
+  "bienes": [],
   "mercaderes": [
     {
-      "_id": 234,
-      "_name": "Pepe",
+      "_id": 12,
+      "_name": "as",
       "_type": "Alquimista",
       "_location": "Kaer Morhen"
     }
   ],
   "clientes": [
     {
-      "_id": 2345,
-      "_name": "Alfredo",
+      "_id": 12,
+      "_name": "as",
       "_race": "Brujo",
-      "_location": "Novigrad"
+      "_location": "Kaer Morhen"
     }
   ]
 }

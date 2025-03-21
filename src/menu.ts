@@ -42,7 +42,7 @@ async function mostrarMenu() {
           ]);
           switch(opcion_bien) {
             case "Añadir":
-              const nuevoBien = await inquirer.prompt([
+              const nuevoBien: {uid: number, nombre: string, descripcion: string, material: string, peso: number, valor: number} = await inquirer.prompt([
                 { type: "number", name: "uid", message: "Escriba la uid del nuevo Bien: "},
                 { type: "input", name: "nombre", message: "Nombre del nuevo Bien:" },
                 { type: "input", name: "descripcion", message: "Descripción del nuevo Bien:" },
@@ -53,7 +53,7 @@ async function mostrarMenu() {
               posada.bienes.addBien(new Bien(nuevoBien.uid, nuevoBien.nombre, nuevoBien.descripcion, nuevoBien.material, nuevoBien.peso, nuevoBien.valor));
             break;
             case "Borrar":
-              const Bien_a_quitar = await inquirer.prompt([
+              const Bien_a_quitar: {uid: number} = await inquirer.prompt([
                 { type: "number", name: "uid", message: "Escriba la uid del Bien a eliminar: "},
               ]);
               posada.bienes.removeBien(Bien_a_quitar.uid);
@@ -70,10 +70,10 @@ async function mostrarMenu() {
                   choices: ["Nombre", "Material", "Descripción"],
                 },
               ]);
-              let resultado: Bien[] = [];
+              let resultado: Bien[];
               switch (opcion_consulta_bien) {
                 case "Nombre":
-                  const nombre_buscar_bien = await inquirer.prompt([
+                  const nombre_buscar_bien: {nombre: string} = await inquirer.prompt([
                     {
                       type: "input", name: "nombre", message: "Nombre del Bien que va a buscar:" 
                     },
@@ -81,7 +81,7 @@ async function mostrarMenu() {
                   resultado = posada.findBienByName(nombre_buscar_bien.nombre);
                 break;
                 case "Material":
-                  const material_buscar_bien = await inquirer.prompt([
+                  const material_buscar_bien: {material: string} = await inquirer.prompt([
                     {
                       type: "input", name: "material", message: "Material del que esta hecho el Bien que va a buscar:" 
                     },
@@ -89,7 +89,7 @@ async function mostrarMenu() {
                   resultado = posada.findBienByMaterial(material_buscar_bien.material);
                 break;
                 case "Descripción":
-                  const descripcion_buscar_bien = await inquirer.prompt([
+                  const descripcion_buscar_bien: {Descripcion: string} = await inquirer.prompt([
                     {
                       type: "input", name: "Descripcion", message: "Descripcion del Bien que va a buscar:" 
                     },
@@ -133,7 +133,7 @@ async function mostrarMenu() {
           ]);
           switch(opcion_mercader) {
             case "Añadir":
-              const nuevoMercader = await inquirer.prompt([
+              const nuevoMercader: {uid: number, nombre: string, Tipo: Tipo_mercader, Ubicación: Ubicacion} = await inquirer.prompt([
                 { type: "number", name: "uid", message: "Escriba la uid del nuevo Mercader: "},
                 { type: "input", name: "nombre", message: "Nombre del nuevo Mercader:" },
                 { type: "list", name: "Tipo", message: "¿De qué tipo es el nuevo Mercader?:", choices: [Tipo_mercader.ALQUIMISTA, Tipo_mercader.DRUIDA, Tipo_mercader.GENERAL, Tipo_mercader.HERRERO, Tipo_mercader.JOYERO] },
@@ -142,7 +142,7 @@ async function mostrarMenu() {
               posada.mercaderes.addMercader(new Mercader(nuevoMercader.uid, nuevoMercader.nombre, nuevoMercader.Tipo, nuevoMercader.Ubicación));
             break;
             case "Borrar":
-              const Mercader_a_quitar = await inquirer.prompt([
+              const Mercader_a_quitar: {uid: number} = await inquirer.prompt([
                 { type: "number", name: "uid", message: "Escriba la uid del Mercader a eliminar: "},
               ]);
               posada.mercaderes.removeMercader(Mercader_a_quitar.uid);
@@ -161,7 +161,7 @@ async function mostrarMenu() {
               ]);
               switch (opcion_consulta_mercader) {
                 case "Nombre":
-                  const nombre_buscar_mercader = await inquirer.prompt([
+                  const nombre_buscar_mercader: {nombre: string} = await inquirer.prompt([
                     {
                       type: "input", name: "nombre", message: "Nombre del Mercader que va a localizar:" 
                     },
@@ -169,7 +169,7 @@ async function mostrarMenu() {
                   console.log(posada.findMercaderByName(nombre_buscar_mercader.nombre));
                 break;
                 case "Tipo":
-                  const tipo_buscar_mercader = await inquirer.prompt([
+                  const tipo_buscar_mercader: {Tipo: Tipo_mercader} = await inquirer.prompt([
                     {
                       type: "list", name: "Tipo", message: "Tipo de mercaderes que quieres localizar:", choices: [Tipo_mercader.ALQUIMISTA, Tipo_mercader.DRUIDA, Tipo_mercader.GENERAL, Tipo_mercader.HERRERO, Tipo_mercader.JOYERO] 
                     },
@@ -177,7 +177,7 @@ async function mostrarMenu() {
                   console.log(posada.findMercaderByType(tipo_buscar_mercader.Tipo));
                 break;
                 case "Ubicación":
-                  const ubicacion_buscar_mercader = await inquirer.prompt([
+                  const ubicacion_buscar_mercader: {Ubicacion: Ubicacion} = await inquirer.prompt([
                     {
                       type: "list", name: "Ubicacion", message: "¿De qué lugar quiere consultar sus Mercaderes?:", choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN] 
                     },
@@ -199,7 +199,7 @@ async function mostrarMenu() {
           ]);
           switch(opcion_clientes) {
             case "Añadir":
-              const nuevo_cliente = await inquirer.prompt([
+              const nuevo_cliente: {uid: number, nombre: string, Raza: Raza, Ubicación: Ubicacion} = await inquirer.prompt([
                 { type: "number", name: "uid", message: "Escriba la uid del nuevo Cliente: "},
                 { type: "input", name: "nombre", message: "Nombre del nuevo Cliente:" },
                 { type: "list", name: "Raza", message: "¿De qué raza es el Cliente a registrar?:", choices: [Raza.BRUJO, Raza.ELFO, Raza.ENANO, Raza.HUMANO] },
@@ -208,7 +208,7 @@ async function mostrarMenu() {
               posada.clientes.addCliente(new Cliente(nuevo_cliente.uid, nuevo_cliente.nombre, nuevo_cliente.Raza, nuevo_cliente.Ubicación));
             break;
             case "Borrar":
-              const Cliente_a_quitar = await inquirer.prompt([
+              const Cliente_a_quitar: {uid: number} = await inquirer.prompt([
                 { type: "number", name: "uid", message: "Escriba la uid del Cliente a eliminar: "},
               ]);
               posada.clientes.removeCliente(Cliente_a_quitar.uid);
@@ -227,7 +227,7 @@ async function mostrarMenu() {
               ]);
               switch (opcion_consulta_cliente) {
                 case "Nombre":
-                  const nombre_buscar_cliente = await inquirer.prompt([
+                  const nombre_buscar_cliente: {nombre: string} = await inquirer.prompt([
                     {
                       type: "input", name: "nombre", message: "Nombre del Cliente que va a localizar:" 
                     },
@@ -235,7 +235,7 @@ async function mostrarMenu() {
                   console.log(posada.findClienteByName(nombre_buscar_cliente.nombre));
                 break;
                 case "Raza":
-                  const raza_buscar_cliente = await inquirer.prompt([
+                  const raza_buscar_cliente: {Raza: Raza} = await inquirer.prompt([
                     {
                       type: "list", name: "Raza", message: "Raza de Clientes que quieres localizar:", choices: [Raza.BRUJO, Raza.ELFO, Raza.ENANO, Raza.HUMANO] 
                     },
@@ -243,7 +243,7 @@ async function mostrarMenu() {
                   console.log(posada.findClienteByRace(raza_buscar_cliente.Raza));
                 break;
                 case "Ubicación":
-                  const ubicacion_buscar_clientes = await inquirer.prompt([
+                  const ubicacion_buscar_clientes: {Ubicacion: Ubicacion} = await inquirer.prompt([
                     {
                       type: "list", name: "Ubicacion", message: "¿De qué lugar quiere consultar sus Clientes?:", choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN] 
                     },
