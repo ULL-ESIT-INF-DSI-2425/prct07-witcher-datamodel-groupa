@@ -1,22 +1,28 @@
 {
   "bienes": [
     {
-      "_id": "1",
-      "_name": "a",
-      "_description": "a",
-      "_material": "a",
-      "_weight": "32",
-      "_price": "123"
-    },
-    {
-      "_id": "1234",
-      "_name": "ae",
-      "_description": "ae",
-      "_material": "aw",
-      "_weight": "23",
-      "_price": "234"
+      "_id": 234,
+      "_name": "Batuta de los Vientos",
+      "_description": "Controla el viento mediante compases",
+      "_material": "Acero",
+      "_weight": 1,
+      "_price": 50000
     }
   ],
-  "mercaderes": [],
-  "clientes": []
+  "mercaderes": [
+    {
+      "_id": 234,
+      "_name": "Pepe",
+      "_type": "Alquimista",
+      "_location": "Kaer Morhen"
+    }
+  ],
+  "clientes": [
+    {
+      "_id": 2345,
+      "_name": "Alfredo",
+      "_race": "Brujo",
+      "_location": "Novigrad"
+    }
+  ]
 }
