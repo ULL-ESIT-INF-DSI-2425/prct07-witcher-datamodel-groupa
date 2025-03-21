@@ -1,6 +1,6 @@
-import { Bien } from './bienes';
-import { Mercader } from './mercaderes';
-import { Cliente } from './clientes';
+import { Bien } from './bienes.js';
+import { Mercader } from './mercaderes.js';
+import { Cliente } from './clientes.js';
 
 /**
  * Clase que representa una colección de bienes

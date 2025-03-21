@@ -1,0 +1,22 @@
+{
+  "bienes": [
+    {
+      "_id": "1",
+      "_name": "a",
+      "_description": "a",
+      "_material": "a",
+      "_weight": "32",
+      "_price": "123"
+    },
+    {
+      "_id": "1234",
+      "_name": "ae",
+      "_description": "ae",
+      "_material": "aw",
+      "_weight": "23",
+      "_price": "234"
+    }
+  ],
+  "mercaderes": [],
+  "clientes": []
+}

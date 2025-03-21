@@ -1,27 +1,19 @@
 import inquirer from "inquirer";
+import { db, initDataBase } from "./Database.js";
 import { Posada } from "./posada.js";
 import { Cliente, Raza } from "./clientes.js";
 import { Mercader, Tipo_mercader, Ubicacion } from "./mercaderes.js";
 import { Bien } from "./bienes.js";
 import { BienCollections, MercaderCollections, ClienteCollections } from "./collections.js";
 
+// Inicializar la base de datos
+await initDataBase(); // Asegúrate de que la base de datos se lea correctamente
 
-
-// Valores por defecto para realizar menú y hacer pruebas de funcionamiento básicas
-// esto luego hay que quitarlo e implementarlo con la database
-    const bien = new Bien(1, 'Espada', 'Espada de acero maldita', 'Acero de Mahakam' , 2, 250);
-    const bien2 = new Bien(2, 'Yelmo', 'Yelmo de cota de malla', 'Cota de malla', 10, 500);
-    const bien_collection = new BienCollections([bien, bien2]);
-    const mercader = new Mercader(1, "Andre", Tipo_mercader.HERRERO, Ubicacion.SKELLIGE);
-    const mercader2 = new Mercader(2, "Roshi", Tipo_mercader.DRUIDA, Ubicacion.KAER_MORHEN);
-    const mercader_collection = new MercaderCollections([mercader, mercader2]);
-    const cliente = new Cliente(1, 'Geralt', 'Brujo', 'Torremolinos');
-    const cliente2 = new Cliente(2, 'Vicente', 'Enano', 'Novigrad' );
-    const clientes_collection = new ClienteCollections([cliente, cliente2]);
-// este bloque de arriba
+const bien_collection = new BienCollections(db.data.bienes);
+const mercader_collection = new MercaderCollections(db.data.mercaderes);
+const clientes_collection = new ClienteCollections(db.data.clientes);
 
 const posada = new Posada(bien_collection, mercader_collection, clientes_collection);
-
 
 async function menu_Bienes() {
   console.log("Ha entrado en los bienes.\n");
@@ -218,12 +210,13 @@ async function addBien() {
        name: 'Precio',
        message: "¿Cuántas coronas cuesta este Bien?:",
     },
-]);
-const nuevo_bien = new Bien(answers.uid, answers.name, answers.Descripcion, answers.Material, answers.Peso, answers.Precio);
-posada.bienes.addBien(nuevo_bien);
-console.log("Se ha añadido el Bien satisfactoriamente.\n");
-// vuelve a lanzar el menú
-await main();
+  ]);
+  const nuevo_bien = new Bien(answers.uid, answers.name, answers.Descripcion, answers.Material, answers.Peso, answers.Precio);
+  posada.bienes.addBien(nuevo_bien);
+  db.data.bienes = posada.bienes.bienes; // Actualiza la base de datos
+  await db.write(); // Guarda la base de datos
+  console.log("Se ha añadido el Bien satisfactoriamente.\n");
+  await main();
 }
 
 async function DeleteBien() {
@@ -258,11 +251,13 @@ async function DeleteBien() {
        name: 'Precio',
        message: "¿Cuántas coronas cuesta este Bien?:",
     },
-]);
-const nuevo_bien = new Bien(answers.uid, answers.name, answers.Descripcion, answers.Material, answers.Peso, answers.Precio);
-posada.bienes.removeBien(nuevo_bien);
-console.log("Se ha borrado el Bien que ha escrito. \n");
-await main();
+  ]);
+  const nuevo_bien = new Bien(answers.uid, answers.name, answers.Descripcion, answers.Material, answers.Peso, answers.Precio);
+  posada.bienes.removeBien(nuevo_bien);
+  db.data.bienes = posada.bienes.bienes; // Actualiza la base de datos
+  await db.write(); // Guarda la base de datos
+  console.log("Se ha borrado el Bien que ha escrito. \n");
+  await main();
 }
 
 async function menu_mercaderes() {
@@ -314,12 +309,13 @@ async function addMercader() {
        message: '¿De dónde viene el nuevo mercader?:',
        choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN],
     },
-]);
-const nuevo_mercader = new Mercader(answers.uid, answers.name, answers.Tipo, answers.Ubicacion);
-posada.mercaderes.addMercader(nuevo_mercader);
-console.log("Se ha añadido al Mercader satisfactoriamente.\n");
-// vuelve a lanzar el menú
-await main();
+  ]);
+  const nuevo_mercader = new Mercader(answers.uid, answers.name, answers.Tipo, answers.Ubicacion);
+  posada.mercaderes.addMercader(nuevo_mercader);
+  db.data.mercaderes = posada.mercaderes.mercaderes; // Actualiza la base de datos
+  await db.write(); // Guarda la base de datos
+  console.log("Se ha añadido al Mercader satisfactoriamente.\n");
+  await main();
 }
 
 async function DeleteMercader() {
@@ -346,12 +342,13 @@ async function DeleteMercader() {
        message: '¿De dónde viene el mercader?:',
        choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN],
     },
-]);
-const mercader_a_borrar = new Mercader(answers.uid, answers.name, answers.Tipo, answers.Ubicacion);
-posada.mercaderes.removeMercader(mercader_a_borrar);
-console.log("Se ha borrado al Mercader satisfactoriamente.\n");
-// vuelve a lanzar el menú
-await main();
+  ]);
+  const mercader_a_borrar = new Mercader(answers.uid, answers.name, answers.Tipo, answers.Ubicacion);
+  posada.mercaderes.removeMercader(mercader_a_borrar);
+  db.data.mercaderes = posada.mercaderes.mercaderes; // Actualiza la base de datos
+  await db.write(); // Guarda la base de datos
+  console.log("Se ha borrado al Mercader satisfactoriamente.\n");
+  await main();
 }
 
 async function consulta_Mercaderes() {
@@ -465,12 +462,13 @@ async function addClientes() {
     message: '¿De dónde viene el nuevo cliente?:',
     choices: [Ubicacion.KAER_MORHEN, Ubicacion.NOVIGRAD, Ubicacion.SKELLIGE, Ubicacion.TORREMOLINOS, Ubicacion.VELEN],
   },
-]);
-const nuevo_cliente = new Cliente(answers.uid, answers.name, answers.Raza, answers.Ubicacion);
-posada.clientes.addCliente(nuevo_cliente);
-console.log("Se ha añadido al cliente satisfactoriamente.\n");
-// vuelve a lanzar el menú
-await main();
+  ]);
+  const nuevo_cliente = new Cliente(answers.uid, answers.name, answers.Raza, answers.Ubicacion);
+  posada.clientes.addCliente(nuevo_cliente);
+  db.data.clientes = posada.clientes.clientes; // Actualiza la base de datos
+  await db.write(); // Guarda la base de datos
+  console.log("Se ha añadido al cliente satisfactoriamente.\n");
+  await main();
 }
 
 async function DeleteClientes() {
@@ -500,8 +498,9 @@ async function DeleteClientes() {
   ]);
   const cliente_a_borrar = new Cliente(answers.uid, answers.name, answers.Raza, answers.Ubicacion);
   posada.clientes.removeCliente(cliente_a_borrar);
+  db.data.clientes = posada.clientes.clientes; // Actualiza la base de datos
+  await db.write(); // Guarda la base de datos
   console.log("Se ha borrado el Cliente satisfactoriamente.\n");
-  // vuelve a lanzar el menú
   await main();
 }
 
@@ -568,6 +567,7 @@ async function consulta_ubicacion_cliente() {
 
 // Opciones del menú
 async function main() {
+
   inquirer.prompt([
   {
     type: "list",
@@ -588,6 +588,11 @@ async function main() {
           break;
         case "Salir del sistema":
           console.log("Saliendo del sistema");
+          // Guardar los datos en la base de datos
+          db.data.bienes = bien_collection.bienes;
+          db.data.mercaderes = mercader_collection.mercaderes;
+          db.data.clientes = clientes_collection.clientes;
+          await db.write();
 
           // Aquí guardar las cosas respectivas en la base de datos
 

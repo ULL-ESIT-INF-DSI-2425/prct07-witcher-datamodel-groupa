@@ -5,9 +5,9 @@
     "./dist"
   ],
     "compilerOptions": {
-    "moduleResolution": "Node",
+    "moduleResolution": "nodenext",
     "target": "ES2024",
-    "module": "ES6",
+    "module": "NodeNext",
     "rootDir": "./src",
     "outDir": "./dist"
   }
