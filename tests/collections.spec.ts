@@ -8,7 +8,7 @@ import { ClienteCollections, MercaderCollections, BienCollections } from '../src
 
 // Simulamos el archivo JSON con Jest (sin tocar archivos reales)
 vi.mock('lowdb/node', () => {
-    const data = { bienes: [] };
+    const data = { clientes: [] };
   
     return {
       JSONFile: vi.fn(() => ({
@@ -23,6 +23,7 @@ vi.mock('lowdb/node', () => {
     };
   });
 
+  
 describe('ClientesCollection', () => {
     const clientesCollection = new ClienteCollections([]);
     const cliente = new Cliente(1, 'Geralt', 'Brujo', 'Torremolinos');
@@ -51,6 +52,39 @@ describe('ClientesCollection', () => {
     });
 
     // Métodos
+
+    let collection = new ClienteCollections([]);
+    beforeEach(() => {
+        collection.loadFromDB('clientes.json');
+      });
+    
+      test('Debe agregar bienes correctamente', async () => {
+        const cliente4 = new Cliente(4, 'Geralt', 'Brujo', 'Torremolinos');
+        collection.addCliente(cliente4);
+    
+        expect(collection.clientes).toHaveLength(1);
+        expect(collection.clientes[0].name).toBe('Geralt');
+        expect(collection.clientes[0].race).toBe('Brujo');
+        expect(collection.clientes[0].location).toBe('Torremolinos');
+      });
+    
+      test('Debe convertir un JSON en una instancia de Bien', () => {
+        const json = {  id: 5, name: 'Geralt', race: 'Brujo', location: 'Torremolinos' };
+        const cliente5 = Cliente.fromJSON(json);
+    
+        expect(cliente5.id).toBe(5);
+        expect(cliente5.name).toBe('Geralt');
+        expect(cliente5.race).toBe('Brujo');
+        expect(cliente5.location).toBe('Torremolinos');
+        
+      });
+    
+      test('Debe guardar bienes en la base de datos (mock)', async () => {
+        const cliente6 = new Cliente(6, 'Antonio', 'Humano', 'Velen');
+        collection.addCliente(cliente6);
+    
+        await collection.saveToDB('bienes.json');
+      });
     test('ADD CLIENTE', () => {
         clientesCollection.addCliente(cliente2);
         expect(clientesCollection.clientes).toEqual([cliente, cliente2]);
@@ -64,6 +98,22 @@ describe('ClientesCollection', () => {
         expect(clientesCollection2.clientes).toEqual([cliente, cliente3]);
     });
 });
+
+vi.mock('lowdb/node', () => {
+    const data = { mercaderes: [] };
+  
+    return {
+      JSONFile: vi.fn(() => ({
+        read: vi.fn(async () => {}),
+        write: vi.fn(async () => {}),
+      })),
+      Low: vi.fn(() => ({
+        data,
+        read: vi.fn(async () => {}),
+        write: vi.fn(async () => {}),
+      })),
+    };
+  });
 
 describe('MercaderesCollection', () => {
     const mercaderesCollection = new MercaderCollections([]);
@@ -93,6 +143,39 @@ describe('MercaderesCollection', () => {
     });
 
     // Métodos
+    let collection = new MercaderCollections([]);
+    beforeEach(() => {
+        collection.loadFromDB('clientes.json');
+      });
+    
+      test('Debe agregar bienes correctamente', async () => {
+        const mercader4 = new Mercader(4, 'Geralt', 'General', 'Torremolinos');
+        collection.addMercader(mercader4);
+    
+        expect(collection.mercaderes).toHaveLength(1);
+        expect(collection.mercaderes[0].name).toBe('Geralt');
+        expect(collection.mercaderes[0].type).toBe('General');
+        expect(collection.mercaderes[0].location).toBe('Torremolinos');
+      });
+    
+      test('Debe convertir un JSON en una instancia de Bien', () => {
+        const json = {  id: 5, name: 'Geralt', type: 'General', location: 'Torremolinos' };
+        const mercader5 = Mercader.fromJSON(json);
+    
+        expect(mercader5.id).toBe(5);
+        expect(mercader5.name).toBe('Geralt');
+        expect(mercader5.type).toBe('General');
+        expect(mercader5.location).toBe('Torremolinos');
+        
+      });
+    
+      test('Debe guardar bienes en la base de datos (mock)', async () => {
+        const mercader6 = new Mercader(6, 'Antonio', 'Druida', 'Velen');
+        collection.addMercader(mercader6);
+    
+        await collection.saveToDB('bienes.json');
+      });
+
     test('ADD MERCADER', () => {
         mercaderesCollection.addMercader(mercader2);
         expect(mercaderesCollection.mercaderes).toEqual([mercader, mercader2]);
@@ -106,6 +189,22 @@ describe('MercaderesCollection', () => {
         expect(mercaderesCollection2.mercaderes).toEqual([mercader, mercader3]);
     });
 });
+
+vi.mock('lowdb/node', () => {
+    const data = { bienes: [] };
+  
+    return {
+      JSONFile: vi.fn(() => ({
+        read: vi.fn(async () => {}),
+        write: vi.fn(async () => {}),
+      })),
+      Low: vi.fn(() => ({
+        data,
+        read: vi.fn(async () => {}),
+        write: vi.fn(async () => {}),
+      })),
+    };
+  });
 
 describe('BienesCollection', () => {
     const bienesCollection = new BienCollections([]);
@@ -141,28 +240,28 @@ describe('BienesCollection', () => {
       });
     
       test('Debe agregar bienes correctamente', async () => {
-        const bien4 = new Bien(1, 'Espada', 'Espada de acero maldita', 'Acero', 2, 250);
-        collection.addBien(bien);
+        const bien4 = new Bien(4, 'Espada', 'Espada de acero maldita', 'Acero', 2, 250);
+        collection.addBien(bien4);
     
         expect(collection.bienes).toHaveLength(1);
         expect(collection.bienes[0].name).toBe('Espada');
       });
     
       test('Debe convertir un JSON en una instancia de Bien', () => {
-        const json = { id: 1, nombre: 'Espada' , description: 'Espada de acero maldita' , material: 'Acero' , peso: 2 , precio: 250  };
-        const bien = Bien.fromJSON(json);
+        const json = { id: 5, nombre: 'Espada' , description: 'Espada de acero maldita' , material: 'Acero' , peso: 2 , precio: 250  };
+        const bien5 = Bien.fromJSON(json);
     
-        expect(bien.id).toBe(1);
-        expect(bien.name).toBe('Espada');
-        expect(bien.description).toBe('Espada de acero maldita');
-        expect(bien.material).toBe('Acero');
-        expect(bien.weight).toBe(2);
-        expect(bien.price).toBe(250);
+        expect(bien5.id).toBe(5);
+        expect(bien5.name).toBe('Espada');
+        expect(bien5.description).toBe('Espada de acero maldita');
+        expect(bien5.material).toBe('Acero');
+        expect(bien5.weight).toBe(2);
+        expect(bien5.price).toBe(250);
       });
     
       test('Debe guardar bienes en la base de datos (mock)', async () => {
-        const bien = new Bien(2, 'Yelmo', 'Yelmo de cota de malla', 'Cota de malla', 10, 500);
-        collection.addBien(bien);
+        const bien6 = new Bien(6, 'Yelmo', 'Yelmo de cota de malla', 'Cota de malla', 10, 500);
+        collection.addBien(bien6);
     
         await collection.saveToDB('bienes.json');
       });
