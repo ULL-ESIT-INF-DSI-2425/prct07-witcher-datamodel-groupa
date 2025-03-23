@@ -1,0 +1,10 @@
+{
+  "mercaderes": [
+    {
+      "id": 9999999,
+      "name": "G.O.D.",
+      "type": "General",
+      "location": "Torremolinos"
+    }
+  ]
+}

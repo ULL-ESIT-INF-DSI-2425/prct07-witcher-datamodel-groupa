@@ -1,5 +1,4 @@
 import inquirer from "inquirer";
-import { db, initDataBase } from "./Database.js";
 import { Posada } from "./posada.js";
 import { Cliente, Raza } from "./clientes.js";
 import { Mercader, Tipo_mercader, Ubicacion } from "./mercaderes.js";
@@ -7,11 +6,18 @@ import { Bien } from "./bienes.js";
 import { BienCollections, MercaderCollections, ClienteCollections } from "./collections.js";
 
 // Inicializar la base de datos
-await initDataBase(); // Asegúrate de que la base de datos se lea correctamente
+const bien_collection = new BienCollections([]);
+const mercader_collection = new MercaderCollections([]);
+const clientes_collection = new ClienteCollections([]);
 
-const bien_collection = new BienCollections(db.data.bienes);
-const mercader_collection = new MercaderCollections(db.data.mercaderes);
-const clientes_collection = new ClienteCollections(db.data.clientes);
+async function initiate_DB() {
+  await bien_collection.loadFromDB('bienes.json'); // Carga antes de usar
+  await mercader_collection.loadFromDB('mercaderes.json');
+  await clientes_collection.loadFromDB('clientes.json');
+}
+
+await initiate_DB();
+
 
 const posada = new Posada(bien_collection, mercader_collection, clientes_collection);
 
@@ -166,6 +172,7 @@ async function mostrarMenu() {
                       type: "input", name: "nombre", message: "Nombre del Mercader que va a localizar:" 
                     },
                   ]);
+                  
                   console.log(posada.findMercaderByName(nombre_buscar_mercader.nombre));
                 break;
                 case "Tipo":
@@ -256,10 +263,9 @@ async function mostrarMenu() {
         break;
         case "Salir":
           console.log("Saliendo...");
-          db.data.bienes = bien_collection.bienes;
-          db.data.mercaderes = mercader_collection.mercaderes;
-          db.data.clientes = clientes_collection.clientes;
-          await db.write();
+          await bien_collection.saveToDB('bienes.json');
+          await mercader_collection.saveToDB('mercaderes.json');
+          await clientes_collection.saveToDB('clientes.json');
           return; 
       }
     }

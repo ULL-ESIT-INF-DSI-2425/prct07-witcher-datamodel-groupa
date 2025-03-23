@@ -1,0 +1,16 @@
+{
+  "clientes": [
+    {
+      "id": 34567,
+      "name": "Siri",
+      "race": "Brujo",
+      "location": "Kaer Morhen"
+    },
+    {
+      "id": 214354,
+      "name": "Geralt",
+      "race": "Brujo",
+      "location": "Kaer Morhen"
+    }
+  ]
+}

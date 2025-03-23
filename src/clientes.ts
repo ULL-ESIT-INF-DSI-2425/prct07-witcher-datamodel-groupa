@@ -68,4 +68,14 @@ export class Cliente implements Clientes {
     this._location = location;
   }
 
+  toJSON() {
+    return { id: this._id, name: this._name, race: this._race, location: this._location  };
+  }
+
+  static fromJSON(json: any): Cliente {
+    if (!json || typeof json.id !== 'number' || typeof json.name !== 'string') {
+      return new Cliente(-1, 'Desconocido', 'Brujo', "Torremolinos"); // Valor por defecto en caso de error
+    }
+    return new Cliente(json.id, json.name, json.race, json.location);
+  }
 }

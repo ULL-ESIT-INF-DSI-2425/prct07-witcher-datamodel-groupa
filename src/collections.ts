@@ -1,6 +1,16 @@
 import { Bien } from './bienes.js';
-import { Mercader } from './mercaderes.js';
-import { Cliente } from './clientes.js';
+import { Mercader, Tipo_mercader, Ubicacion } from './mercaderes.js';
+import { Cliente, Raza } from './clientes.js';
+import { Low } from 'lowdb';
+import { JSONFile } from 'lowdb/node';
+
+
+type Data_bienes = { bienes: { id: number; nombre: string; description: string; material: string; peso: number; precio: number; }[] };
+
+type Data_mercaderes = { mercaderes: { id: number; name: string; type: Tipo_mercader; location: Ubicacion; }[] };
+
+type Data_clientes = { clientes: { id: number; name: string; race: Raza; location: Ubicacion; }[] };
+
 
 /**
  * Clase que representa una colección de bienes
@@ -20,6 +30,34 @@ export class BienCollections {
     this._list = bienes;
   }
 
+  async loadFromDB(dbFile: string) {
+    if (!dbFile) return;
+
+    const adapter = new JSONFile<Data_bienes>(dbFile);
+    const db = new Low(adapter, { bienes: [] });
+
+    await db.read();
+
+    if (!db.data || !db.data.bienes) {
+      db.data = { bienes: [] };
+    }
+
+    // Convertimos los datos JSON en instancias de Bien
+    this._list = db.data.bienes.map(b => Bien.fromJSON(b));
+
+  }
+
+  async saveToDB(dbFile: string) {
+    if (!dbFile) return;
+
+    const adapter = new JSONFile<Data_bienes>(dbFile);
+    const db = new Low(adapter, { bienes: [] });
+
+    // Guardamos en JSON con un formato válido
+    db.data.bienes = this._list.map(b => b.toJSON());
+    await db.write();
+  }
+
   /**
    * Añade un bien a la colección
    * @param bien - Bien a añadir
@@ -32,8 +70,8 @@ export class BienCollections {
    * Elimina un bien de la colección
    * @param bien - Bien a eliminar
    */
-  removeBien(prop: number) {
-    this._list = this._list.filter(m => m.id !== prop);
+  removeBien(bien: number) {
+    this._list = this._list.filter(m => m.id !== bien);
   }
 }
 
@@ -53,6 +91,34 @@ export class MercaderCollections {
 
   set mercaderes(mercaderes: Mercader[]) {
     this._list = mercaderes;
+  }
+  
+  async loadFromDB(dbFile: string) {
+    if (!dbFile) return;
+
+    const adapter = new JSONFile<Data_mercaderes>(dbFile);
+    const db = new Low(adapter, { mercaderes: [] });
+
+    await db.read();
+
+    if (!db.data || !db.data.mercaderes) {
+      db.data = { mercaderes: [] };
+    }
+
+    // Convertimos los datos JSON en instancias de Bien
+    this._list = db.data.mercaderes.map(b => Mercader.fromJSON(b));
+
+  }
+
+  async saveToDB(dbFile: string) {
+    if (!dbFile) return;
+
+    const adapter = new JSONFile<Data_mercaderes>(dbFile);
+    const db = new Low(adapter, { mercaderes: [] });
+
+    // Guardamos en JSON con un formato válido
+    db.data.mercaderes = this._list.map(b => b.toJSON());
+    await db.write();
   }
 
   /**
@@ -87,6 +153,34 @@ export class ClienteCollections {
 
   set clientes(clientes: Cliente[]) {
     this._list = clientes;
+  }
+  
+  async loadFromDB(dbFile: string) {
+    if (!dbFile) return;
+
+    const adapter = new JSONFile<Data_clientes>(dbFile);
+    const db = new Low(adapter, { clientes: [] });
+
+    await db.read();
+
+    if (!db.data || !db.data.clientes) {
+      db.data = { clientes: [] };
+    }
+
+    // Convertimos los datos JSON en instancias de Bien
+    this._list = db.data.clientes.map(b => Cliente.fromJSON(b));
+
+  }
+
+  async saveToDB(dbFile: string) {
+    if (!dbFile) return;
+
+    const adapter = new JSONFile<Data_clientes>(dbFile);
+    const db = new Low(adapter, { clientes: [] });
+
+    // Guardamos en JSON con un formato válido
+    db.data.clientes = this._list.map(b => b.toJSON());
+    await db.write();
   }
 
   /**

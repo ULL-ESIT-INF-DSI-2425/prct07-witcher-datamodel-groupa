@@ -30,6 +30,17 @@ export class Bien implements Bienes {
     this._price = precio;
   }
 
+  toJSON() {
+    return { id: this._id, nombre: this._name, description: this._description, material: this._material, peso: this._weight, precio: this._price };
+  }
+
+  static fromJSON(json: any): Bien {
+    if (!json || typeof json.id !== 'number' || typeof json.nombre !== 'string' || typeof json.description !== 'string' || typeof json.material !== 'string' || typeof json.peso !== 'number' || typeof json.precio !== 'number') {
+      return new Bien(-1, 'Desconocido', 'Desconocido', "Desconocido", -1, -1); // Valor por defecto en caso de error
+    }
+    return new Bien(json.id, json.nombre, json.description, json.material, json.peso, json.precio);
+  }
+
   get id(): number {
     return this._id;
   }

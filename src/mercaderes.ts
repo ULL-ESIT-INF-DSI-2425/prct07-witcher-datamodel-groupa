@@ -80,4 +80,14 @@ export class Mercader implements Mercaderes {
     this._location = value;
   }
 
+  toJSON() {
+    return { id: this._id, name: this._name, type: this._type, location: this._location  };
+  }
+
+  static fromJSON(json: any): Mercader {
+    if (!json || typeof json.id !== 'number' || typeof json.name !== 'string') {
+      return new Mercader(-1, 'Desconocido', 'Alquimista', "Torremolinos"); // Valor por defecto en caso de error
+    }
+    return new Mercader(json.id, json.name, json.type, json.location);
+  }
 }

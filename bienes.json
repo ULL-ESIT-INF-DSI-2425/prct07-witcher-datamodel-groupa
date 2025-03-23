@@ -1,0 +1,12 @@
+{
+  "bienes": [
+    {
+      "id": 1234567,
+      "nombre": "Batuta de los Vientos",
+      "description": "Batuta que permite llevar el compás de los vientos y dirigirlos a voluntad",
+      "material": "Acero",
+      "peso": 1,
+      "precio": 50000
+    }
+  ]
+}
