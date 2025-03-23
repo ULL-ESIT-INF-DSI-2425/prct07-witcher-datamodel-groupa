@@ -11,7 +11,7 @@ export const Raza = {
 
 export type Raza = typeof Raza[keyof typeof Raza];
 /**
- * Interfaz de un cliente
+ * Interfaz que representa un cliente en el sistema.
  */
 export interface Clientes {
     id: number;
@@ -21,7 +21,7 @@ export interface Clientes {
 }
 
 /**
- * Clase que representa un cliente
+ * Clase que representa un cliente dentro del sistema.
  */
 export class Cliente implements Clientes {
   private _id: number;
@@ -29,12 +29,23 @@ export class Cliente implements Clientes {
   private _race: Raza;
   private _location: Ubicacion;
 
+  /**
+   * Constructor de la clase Cliente.
+   * @param id Identificador único del cliente.
+   * @param name Nombre del cliente.
+   * @param race Raza del cliente.
+   * @param location Ubicación actual del cliente.
+   */  
   constructor(id: number, name: string, race: Raza, location: Ubicacion) {
     this._id = id;
     this._name = name;
     this._race = race;
     this._location = location;
   }
+
+    /**
+   * Métodos de acceso (getters y setters) para los atributos de la clase.
+   */
 
   get id(): number {
     return this._id;
@@ -68,10 +79,20 @@ export class Cliente implements Clientes {
     this._location = location;
   }
 
+    /**
+   * Convierte el objeto Cliente a un formato JSON.
+   * @returns Un objeto JSON con los atributos del cliente.
+   */
   toJSON() {
     return { id: this._id, name: this._name, race: this._race, location: this._location  };
   }
 
+  
+  /**
+   * Crea un objeto Cliente a partir de un objeto JSON.
+   * @param json Objeto JSON con los atributos del cliente.
+   * @returns Un objeto Cliente.
+   */
   static fromJSON(json: any): Cliente {
     if (!json || typeof json.id !== 'number' || typeof json.name !== 'string') {
       return new Cliente(-1, 'Desconocido', 'Brujo', "Torremolinos"); // Valor por defecto en caso de error

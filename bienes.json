@@ -7,6 +7,158 @@
       "material": "Acero",
       "peso": 1,
       "precio": 50000
+    },
+    {
+      "id": 36532,
+      "nombre": "Espada Maestra",
+      "description": "Espada Sagrada capaz de repeler el mal",
+      "material": "Acero Sagrado",
+      "peso": 10,
+      "precio": 10000
+    },
+    {
+      "id": 345621223,
+      "nombre": "Bocata Lomo",
+      "description": "Bocata Lomo ya!",
+      "material": "Pan y Lomo",
+      "peso": 1,
+      "precio": 500
+    },
+    {
+      "id": 347263,
+      "nombre": "Flor Ígnea",
+      "description": "Flor que permite al usuario que la porte lanzar fuego desde sus manos",
+      "material": "Nutriente y Clorofila",
+      "peso": 1,
+      "precio": 7000
+    },
+    {
+      "id": 345612,
+      "nombre": "Mono de cuerda",
+      "description": "¿Tiene grafiteada una sonrisa?",
+      "material": "Chatarra",
+      "peso": 1,
+      "precio": 500
+    },
+    {
+      "id": 3426532,
+      "nombre": "Gran Espadón",
+      "description": "Espada de Gran tamaño que una vez portó un berserker",
+      "material": "Acero pulido",
+      "peso": 20,
+      "precio": 10000
+    },
+    {
+      "id": 4562846,
+      "nombre": "Bocadillo de Pollo",
+      "description": "Que bueno que está Dios",
+      "material": "Pan, Pollo y Mayonesa",
+      "peso": 1,
+      "precio": 30
+    },
+    {
+      "id": 4632343,
+      "nombre": "Paravela",
+      "description": "Pequeño ala delta, que permite a aquel que lo use planear",
+      "material": "Madera y Tela Orni",
+      "peso": 1,
+      "precio": 50000
+    },
+    {
+      "id": 57392764,
+      "nombre": "Tableta Sheikah",
+      "description": "Trozo de piedra que permite realiza un gran variedad de magias",
+      "material": "Piedra y Agua Mística",
+      "peso": 1,
+      "precio": 50000
+    },
+    {
+      "id": 746237653,
+      "nombre": "Frasco de Estus",
+      "description": "Frasco que contiene restos de la llama sagrada. Permite recuperar la salud",
+      "material": "Cristal y Ascuas",
+      "peso": 1,
+      "precio": 1000000
+    },
+    {
+      "id": 7342876,
+      "nombre": "Humanidad",
+      "description": "Consumirla te devuelve una humanidad, con la que puedes hacer múltitud de cosas",
+      "material": "Almas",
+      "peso": 1,
+      "precio": 75000
+    },
+    {
+      "id": 632864,
+      "nombre": "Poción",
+      "description": "Permite recuperar 20 PS",
+      "material": "Bayas Aranjas",
+      "peso": 1,
+      "precio": 3000
+    },
+    {
+      "id": 873426,
+      "nombre": "Espada de diamante",
+      "description": "Luce un poco extraña... ¿Está hecha de cubos?",
+      "material": "2 Diamantes y un Palo de Madera",
+      "peso": 10,
+      "precio": 150000
+    },
+    {
+      "id": 981326,
+      "nombre": "Guadaña Oscura",
+      "description": "Leyendas dicen que solo aquellos con una gran convicción pueden resistir al demonio que habita dentro de esta",
+      "material": "Acero y Carne demoniaca",
+      "peso": 15,
+      "precio": 6000000
+    },
+    {
+      "id": 6969696969,
+      "nombre": "Papas Locas",
+      "description": "Dios como me entraban unas papas locas ahora",
+      "material": "Papas fritas, multitud de topings y salsas",
+      "peso": 2,
+      "precio": 1000
+    },
+    {
+      "id": 873124456,
+      "nombre": "Amuleto",
+      "description": "Aumenta el ataque de los movimientos de tipo Fantasma",
+      "material": "Papel y Bendiciones",
+      "peso": 1,
+      "precio": 50000
+    },
+    {
+      "id": 325786235,
+      "nombre": "Hada en una Botella",
+      "description": "Pequeña hada del bosque con poderes curativos. Te reanimará una vez en caso de que caigas derrotado",
+      "material": "Un Hada y una Botella",
+      "peso": 1,
+      "precio": 4000
+    },
+    {
+      "id": 3548764,
+      "nombre": "Sombrero Parlante",
+      "description": "Cuando te lo pones en la cabeza dice nombres aleatorios de casas. Qué raro...",
+      "material": "Tela y Magia",
+      "peso": 1,
+      "precio": 4000
+    },
+    {
+      "id": 420420420,
+      "nombre": "Arepa Reina Pepiada",
+      "description": "Tremenda arepa, que buena está",
+      "material": "Pan, Aguacate, Queso y Mantequilla",
+      "peso": 1,
+      "precio": 1000
+    },
+    {
+      "id": 112764,
+      "nombre": "Ocarina del Tiempo",
+      "description": "Presente de la princesa del reino, con la capacidad de realizar magia si se entonan las notas correctas en ella",
+      "material": "Piedra del tiempo",
+      "peso": 2,
+      "precio": 6000000
     }
   ]
 }

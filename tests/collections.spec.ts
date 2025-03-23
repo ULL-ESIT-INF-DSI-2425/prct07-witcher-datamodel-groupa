@@ -97,6 +97,19 @@ describe('ClientesCollection', () => {
         clientesCollection2.removeCliente(2);
         expect(clientesCollection2.clientes).toEqual([cliente, cliente3]);
     });
+    test('CHECK ID', () => {
+        expect(clientesCollection.checkID(1)).toBe(true);
+        expect(clientesCollection.checkID(123465)).toBe(false);
+    });
+    test('MOD CLIENTE', () => {
+        let cliente7 = new Cliente(1, "pepe", "Brujo", "Skellige");
+        clientesCollection.modCliente(cliente7);
+        expect(clientesCollection.clientes).toEqual([cliente7]);
+        clientesCollection.addCliente(cliente2);
+        clientesCollection.modCliente(cliente);
+        expect(clientesCollection.clientes).toEqual([cliente, cliente2]);
+    });
+
 });
 
 vi.mock('lowdb/node', () => {
@@ -188,6 +201,19 @@ describe('MercaderesCollection', () => {
         mercaderesCollection2.removeMercader(2);
         expect(mercaderesCollection2.mercaderes).toEqual([mercader, mercader3]);
     });
+    test('CHECK ID', () => {
+       expect(mercaderesCollection.checkID(1)).toBe(true);
+       expect(mercaderesCollection.checkID(24)).toBe(false);
+    });
+    test('MOD MERCADER', () => {
+        let mercader7 = new Mercader(1, "pepe", "Alquimista", "Skellige");
+        mercaderesCollection.modMercader(mercader7);
+        expect(mercaderesCollection.mercaderes).toEqual([mercader7]);
+        mercaderesCollection.addMercader(mercader2);
+        mercaderesCollection.modMercader(mercader);
+        expect(mercaderesCollection.mercaderes).toEqual([mercader, mercader2]);
+    });
+
 });
 
 vi.mock('lowdb/node', () => {
@@ -278,5 +304,18 @@ describe('BienesCollection', () => {
         expect(bienesCollection.bienes).toEqual([bien]);
         bienesCollection2.removeBien(2);
         expect(bienesCollection2.bienes).toEqual([bien, bien3]);
+    });
+
+    test('CHECK ID', () => {
+        expect(bienesCollection.checkID(1)).toBe(true);
+        expect(bienesCollection.checkID(10)).toBe(false);
+    });
+    test('MOD CLIENTE', () => {
+        let bien7 = new Bien(1, "pepe", "El pepe", "Acero", 34, 56);
+        bienesCollection.modBien(bien7);
+        expect(bienesCollection.bienes).toEqual([bien7]);
+        bienesCollection.addBien(bien2);
+        bienesCollection.modBien(bien);
+        expect(bienesCollection.bienes).toEqual([bien, bien2]);
     });
 });

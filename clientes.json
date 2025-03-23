@@ -2,7 +2,7 @@
   "clientes": [
     {
       "id": 34567,
-      "name": "Siri",
+      "name": "Ciri",
       "race": "Brujo",
       "location": "Kaer Morhen"
     },
@@ -11,6 +11,54 @@
       "name": "Geralt",
       "race": "Brujo",
       "location": "Kaer Morhen"
+    },
+    {
+      "id": 765432,
+      "name": "Francesca Findabair",
+      "race": "Humano",
+      "location": "Kaer Morhen"
+    },
+    {
+      "id": 87646783,
+      "name": "Sheala",
+      "race": "Elfo",
+      "location": "Novigrad"
+    },
+    {
+      "id": 47272392,
+      "name": "Philippa",
+      "race": "Enano",
+      "location": "Skellige"
+    },
+    {
+      "id": 5746382,
+      "name": "Letho",
+      "race": "Elfo",
+      "location": "Novigrad"
+    },
+    {
+      "id": 34782645,
+      "name": "Saskia",
+      "race": "Enano",
+      "location": "Velen"
+    },
+    {
+      "id": 37845692,
+      "name": "Roronoa Zoro",
+      "race": "Humano",
+      "location": "Novigrad"
+    },
+    {
+      "id": 4365884923,
+      "name": "Link",
+      "race": "Elfo",
+      "location": "Velen"
+    },
+    {
+      "id": 2147547,
+      "name": "Yennefer",
+      "race": "Brujo",
+      "location": "Velen"
     }
   ]
 }

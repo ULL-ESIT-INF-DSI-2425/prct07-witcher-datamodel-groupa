@@ -1,21 +1,33 @@
 import { Bien } from "./bienes.js";
 import { Mercader, Ubicacion, Tipo_mercader } from "./mercaderes.js";
 import { BienCollections, MercaderCollections, ClienteCollections } from "./collections.js";
- import { Cliente, Raza } from "./clientes.js";
+import { Cliente, Raza } from "./clientes.js";
 
 /**
- * Clase que representa una posada
+ * Clase que representa una posada en el sistema.
+ * Contiene colecciones de bienes, mercaderes y clientes.
  */
 export class Posada {
   private _bienes: BienCollections;
   private _mercaderes: MercaderCollections;
   private _clientes: ClienteCollections;
+
+    /**
+   * Constructor de la clase Posada.
+   * @param bienes Colección de bienes disponibles en la posada.
+   * @param mercaderes Colección de mercaderes presentes en la posada.
+   * @param clientes Colección de clientes hospedados en la posada.
+   */
   
   constructor(bienes: BienCollections, mercaderes: MercaderCollections, clientes: ClienteCollections) {
     this._bienes = bienes;
     this._mercaderes = mercaderes;
     this._clientes = clientes;
   }
+  
+   /**
+   * Métodos de acceso (getters y setters) para los atributos de la clase.
+   */
   
   get bienes(): BienCollections {
     return this._bienes;
@@ -40,55 +52,6 @@ export class Posada {
   set clientes(clientes: ClienteCollections) {
     this._clientes = clientes;
   }
-
-  // /**
-  //  * Añade un bien a la posada
-  //  * @param bien - Bien a añadir
-  //  */
-  // addBien(bien: Bien) {
-  //   this._bienes.push(bien);
-  // }
-
-  // /**
-  //  * Elimina un bien de la posada
-  //  * @param bien - Bien a eliminar
-  //  */
-  // removeBien(bien: Bien) {
-  //   this._bienes = this._bienes.filter(b => b.id !== bien.id);
-  // }
-
-  // /**
-  //  * Añade un mercader a la posada
-  //  * @param mercader - Mercader a añadir
-  //  */
-  // addMercader(mercader: Mercader) {
-  //   this._mercaderes.push(mercader);
-  // }
-
-  // /**
-  //  * Elimina un mercader de la posada
-  //  * @param mercader - Mercader a eliminar
-  //  */
-  // removeMercader(mercader: Mercader) {
-  //   this._mercaderes = this._mercaderes.filter(merc => merc.id !== mercader.id);
-  // }
-
-  // /**
-  //  * Añade un cliente a la posada
-  //  * @param cliente - Cliente a añadir
-  //  */
-  // addCliente(cliente: Cliente) {
-  //   this._clientes.push(cliente);
-  // }
-
-  // /**
-  //  * Elimina un cliente de la posada
-  //  * @param cliente - Cliente a eliminar
-  //  */
-  // removeCliente(cliente: Cliente) {
-  //   this._clientes = this._clientes.filter(ccli => ccli.id !== cliente.id);
-  // }
-
   /**
    * Busca bienes por su nombre
    * @param name - Nombre del bien a buscar
@@ -198,7 +161,7 @@ export class Posada {
 
   /**
    * Busca clientes por su raza
-   * @param raza - Raza del cliente a buscar
+   * @param race - Raza del cliente a buscar
    * @returns Array de clientes con la raza buscada
    */
   findClienteByRace(race: Raza): Cliente[] {

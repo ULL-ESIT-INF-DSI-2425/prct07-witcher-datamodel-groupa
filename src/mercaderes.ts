@@ -9,10 +9,16 @@ export const Tipo_mercader = {
   DRUIDA: "Druida"
 } as const;
 
+/**
+ * Tipo que define los valores permitidos para un mercader.
+ */
+
 export type Tipo_mercader = typeof Tipo_mercader[keyof typeof Tipo_mercader];
+
 /**
  * Tipo que contiene las posibles ubicaciones de los mercaderes
  */
+
 export const Ubicacion = {
   NOVIGRAD: "Novigrad",
   VELEN: "Velen",
@@ -22,9 +28,11 @@ export const Ubicacion = {
 } as const;
 
 export type Ubicacion = typeof Ubicacion[keyof typeof Ubicacion];
+
 /**
- * Interfaz de un mercader
+ * Interfaz que representa un mercader dentro del sistema.
  */
+
 export interface Mercaderes {
     id: number;
     name: string;
@@ -33,13 +41,22 @@ export interface Mercaderes {
 }
 
 /**
- * Clase que representa un mercader
+ * Clase que representa un mercader dentro del sistema.
  */
+
 export class Mercader implements Mercaderes {
   private _id: number;
   private _name: string;
   private _type: Tipo_mercader;
   private _location: Ubicacion;
+
+    /**
+   * Constructor de la clase Mercader.
+   * @param id Identificador único del mercader.
+   * @param name Nombre del mercader.
+   * @param type Tipo de mercader (herrero, alquimista, etc.).
+   * @param location Ubicación actual del mercader.
+   */
 
   constructor(id: number, name: string, type: Tipo_mercader, location: Ubicacion) {
     this._id = id;
@@ -47,6 +64,10 @@ export class Mercader implements Mercaderes {
     this._type = type;
     this._location = location;
   }
+
+ /**
+  * Métodos de acceso (getters y setters) para los atributos de la clase.
+  */
 
   get id(): number {
     return this._id;
@@ -80,10 +101,20 @@ export class Mercader implements Mercaderes {
     this._location = value;
   }
 
+    /**
+   * Convierte el objeto Mercader a un formato JSON.
+   * @returns Un objeto JSON con los atributos del mercader.
+   */
   toJSON() {
     return { id: this._id, name: this._name, type: this._type, location: this._location  };
   }
 
+    /**
+   * Crea una instancia de `Mercader` a partir de un objeto JSON.
+   * Si el JSON no tiene el formato adecuado, devuelve un mercader con valores predeterminados.
+   * @param json Objeto JSON con los datos del mercader.
+   * @returns Una instancia de `Mercader`.
+   */
   static fromJSON(json: any): Mercader {
     if (!json || typeof json.id !== 'number' || typeof json.name !== 'string') {
       return new Mercader(-1, 'Desconocido', 'Alquimista', "Torremolinos"); // Valor por defecto en caso de error

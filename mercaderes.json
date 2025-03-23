@@ -5,6 +5,72 @@
       "name": "G.O.D.",
       "type": "General",
       "location": "Torremolinos"
+    },
+    {
+      "id": 9456,
+      "name": "Declan Leuvardeen",
+      "type": "General",
+      "location": "Novigrad"
+    },
+    {
+      "id": 7635,
+      "name": "Abigail",
+      "type": "Druida",
+      "location": "Velen"
+    },
+    {
+      "id": 532897476,
+      "name": "Viejo Druida",
+      "type": "Druida",
+      "location": "Skellige"
+    },
+    {
+      "id": 9378497127,
+      "name": "Haren Brogg",
+      "type": "Joyero",
+      "location": "Kaer Morhen"
+    },
+    {
+      "id": 126768886,
+      "name": "Ermitaño",
+      "type": "Alquimista",
+      "location": "Torremolinos"
+    },
+    {
+      "id": 6534765,
+      "name": "Julian",
+      "type": "Herrero",
+      "location": "Novigrad"
+    },
+    {
+      "id": 12089344041,
+      "name": "Kalkstein",
+      "type": "Herrero",
+      "location": "Velen"
+    },
+    {
+      "id": 21478099,
+      "name": "Curandero",
+      "type": "Druida",
+      "location": "Kaer Morhen"
+    },
+    {
+      "id": 214719847,
+      "name": "Thaler",
+      "type": "Herrero",
+      "location": "Skellige"
+    },
+    {
+      "id": 846739875,
+      "name": "Vaska",
+      "type": "Joyero",
+      "location": "Velen"
+    },
+    {
+      "id": 4673923,
+      "name": "Jardinero",
+      "type": "Druida",
+      "location": "Torremolinos"
     }
   ]
 }
