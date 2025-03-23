@@ -1,8 +1,27 @@
-import { describe, test, expect } from 'vitest' ;
+import { describe, test, expect, beforeEach, vi } from 'vitest' ;
+import { JSONFile } from 'lowdb/node';
+import { Low } from 'lowdb';
 import { Cliente } from '../src/clientes.js';
 import { Mercader } from '../src/mercaderes.js';
 import { Bien } from '../src/bienes.js';
 import { ClienteCollections, MercaderCollections, BienCollections } from '../src/collections.js';
+
+// Simulamos el archivo JSON con Jest (sin tocar archivos reales)
+vi.mock('lowdb/node', () => {
+    const data = { bienes: [] };
+  
+    return {
+      JSONFile: vi.fn(() => ({
+        read: vi.fn(async () => {}),
+        write: vi.fn(async () => {}),
+      })),
+      Low: vi.fn(() => ({
+        data,
+        read: vi.fn(async () => {}),
+        write: vi.fn(async () => {}),
+      })),
+    };
+  });
 
 describe('ClientesCollection', () => {
     const clientesCollection = new ClienteCollections([]);
@@ -39,9 +58,9 @@ describe('ClientesCollection', () => {
         expect(clientesCollection2.clientes).toEqual([cliente, cliente2, cliente3]);
     });
     test('REMOVE CLIENTE', () => {
-        clientesCollection.removeCliente(cliente2);
+        clientesCollection.removeCliente(2);
         expect(clientesCollection.clientes).toEqual([cliente]);
-        clientesCollection2.removeCliente(cliente2);
+        clientesCollection2.removeCliente(2);
         expect(clientesCollection2.clientes).toEqual([cliente, cliente3]);
     });
 });
@@ -81,9 +100,9 @@ describe('MercaderesCollection', () => {
         expect(mercaderesCollection2.mercaderes).toEqual([mercader, mercader2, mercader3]);
     });
     test('REMOVE MERCADER', () => {
-        mercaderesCollection.removeMercader(mercader2);
+        mercaderesCollection.removeMercader(2);
         expect(mercaderesCollection.mercaderes).toEqual([mercader]);
-        mercaderesCollection2.removeMercader(mercader2);
+        mercaderesCollection2.removeMercader(2);
         expect(mercaderesCollection2.mercaderes).toEqual([mercader, mercader3]);
     });
 });
@@ -116,6 +135,38 @@ describe('BienesCollection', () => {
     });
 
     // Métodos
+    let collection = new BienCollections([]);
+    beforeEach(() => {
+        collection.loadFromDB('bienes.json');
+      });
+    
+      test('Debe agregar bienes correctamente', async () => {
+        const bien4 = new Bien(1, 'Espada', 'Espada de acero maldita', 'Acero', 2, 250);
+        collection.addBien(bien);
+    
+        expect(collection.bienes).toHaveLength(1);
+        expect(collection.bienes[0].name).toBe('Espada');
+      });
+    
+      test('Debe convertir un JSON en una instancia de Bien', () => {
+        const json = { id: 1, nombre: 'Espada' , description: 'Espada de acero maldita' , material: 'Acero' , peso: 2 , precio: 250  };
+        const bien = Bien.fromJSON(json);
+    
+        expect(bien.id).toBe(1);
+        expect(bien.name).toBe('Espada');
+        expect(bien.description).toBe('Espada de acero maldita');
+        expect(bien.material).toBe('Acero');
+        expect(bien.weight).toBe(2);
+        expect(bien.price).toBe(250);
+      });
+    
+      test('Debe guardar bienes en la base de datos (mock)', async () => {
+        const bien = new Bien(2, 'Yelmo', 'Yelmo de cota de malla', 'Cota de malla', 10, 500);
+        collection.addBien(bien);
+    
+        await collection.saveToDB('bienes.json');
+      });
+    
     test('ADD BIEN', () => {
         bienesCollection.addBien(bien2);
         expect(bienesCollection.bienes).toEqual([bien, bien2]);
@@ -124,9 +175,9 @@ describe('BienesCollection', () => {
     });
 
     test('REMOVE BIEN', () => {
-        bienesCollection.removeBien(bien2);
+        bienesCollection.removeBien(2);
         expect(bienesCollection.bienes).toEqual([bien]);
-        bienesCollection2.removeBien(bien2);
+        bienesCollection2.removeBien(2);
         expect(bienesCollection2.bienes).toEqual([bien, bien3]);
     });
 });
