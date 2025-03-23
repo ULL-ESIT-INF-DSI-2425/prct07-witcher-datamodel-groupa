@@ -21,7 +21,7 @@ jobs:
     - name: Installing dependencies
       run: npm ci
     - name: Generating coverage information
-      run: npm run coverage --coverage.include 'src/*'
+      run: npm run coverage --coverage.exclude 'src/menu.ts'
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.6
       with:
