@@ -37,7 +37,7 @@ export class BienCollections {
     this._list = bienes;
   }
   /**
-   * Función que se encarga de cargar los datos de un .json en la colección de clientes
+   * Función que se encarga de cargar los datos de un .json en la colección de bienes
    * @param dbFile Nombre del fichero .json del que se extraerán los datos
    * @returns Nada, termina el proceso en caso de que no exista el fichero
    */

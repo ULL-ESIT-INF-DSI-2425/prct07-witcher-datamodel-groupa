@@ -71,6 +71,10 @@
       "name": "Jardinero",
       "type": "Druida",
       "location": "Torremolinos"
+    },
+    {
+      "id": 1,
+      "name": "Geralt"
     }
   ]
 }

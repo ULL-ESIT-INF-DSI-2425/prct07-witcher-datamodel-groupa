@@ -49,4 +49,14 @@ describe('Cliente', () => {
     expect(mercader2.location).toBe('Velen');
   });
 
+  //  test funcion fromJSON
+  test('FROM JSON', () => {
+    const json = JSON.stringify(mercader);
+    const mercaderFromJSON = Mercader.fromJSON(json);
+    expect(mercaderFromJSON.id).toBe(-1);
+    expect(mercaderFromJSON.name).toBe('Desconocido');
+    expect(mercaderFromJSON.type).toBe('Alquimista');
+    expect(mercaderFromJSON.location).toBe('Torremolinos');
+  });
+  
 });

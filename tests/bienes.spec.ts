@@ -68,4 +68,16 @@ describe('Bien', () => {
         bien2.price = 1000;
         expect(bien2.price).toBe(1000);
     });
+
+    // test funcion fromJSON
+    test('FROM JSON', () => {
+        const json = JSON.stringify(bien);
+        const bienFromJSON = Bien.fromJSON(json);
+        expect(bienFromJSON.id).toBe(-1);
+        expect(bienFromJSON.name).toBe('Desconocido');
+        expect(bienFromJSON.description).toBe('Desconocido');
+        expect(bienFromJSON.material).toBe('Desconocido');
+        expect(bienFromJSON.weight).toBe(-1);
+        expect(bienFromJSON.price).toBe(-1);
+    });
 });

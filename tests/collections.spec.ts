@@ -110,6 +110,13 @@ describe('ClientesCollection', () => {
         expect(clientesCollection.clientes).toEqual([cliente, cliente2]);
     });
 
+    // test loadFromDB, situacion donde no hay datos
+    test('LOAD FROM DB BUT IS EMPTY', async () => {
+      const collection = new ClienteCollections([]);
+      await collection.loadFromDB('clientesEmpty.json');
+      expect(collection.clientes).toEqual([]);
+    });
+
 });
 
 vi.mock('lowdb/node', () => {
@@ -212,6 +219,13 @@ describe('MercaderesCollection', () => {
         mercaderesCollection.addMercader(mercader2);
         mercaderesCollection.modMercader(mercader);
         expect(mercaderesCollection.mercaderes).toEqual([mercader, mercader2]);
+    });
+
+    // test loadFromDB, situacion donde no hay datos
+    test('LOAD FROM DB BUT IS EMPTY', async () => {
+      const collection = new MercaderCollections([]);
+      await collection.loadFromDB('mercaderesEmpty.json');
+      expect(collection.mercaderes).toEqual([]);
     });
 
 });
@@ -318,4 +332,11 @@ describe('BienesCollection', () => {
         bienesCollection.modBien(bien);
         expect(bienesCollection.bienes).toEqual([bien, bien2]);
     });
-});
+
+    // test loadFromDB, situacion donde no hay datos
+    test('LOAD FROM DB BUT IS EMPTY', async () => {
+        const collection = new BienCollections([]);
+        await collection.loadFromDB('bienesEmpty.json');
+        expect(collection.bienes).toEqual([]);
+    });
+  });

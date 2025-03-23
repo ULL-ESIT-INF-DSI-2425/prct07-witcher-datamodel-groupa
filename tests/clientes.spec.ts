@@ -48,5 +48,15 @@ describe('Cliente', () => {
         cliente2.location = 'Skellige';
         expect(cliente2.location).toBe('Skellige');
     });
+
+    // test funcion fromJSON
+    test('FROM JSON', () => {
+        const json = JSON.stringify(cliente);
+        const clienteFromJSON = Cliente.fromJSON(json);
+        expect(clienteFromJSON.id).toBe(-1);
+        expect(clienteFromJSON.name).toBe('Desconocido');
+        expect(clienteFromJSON.race).toBe('Brujo');
+        expect(clienteFromJSON.location).toBe('Torremolinos');
+    });
 });
 

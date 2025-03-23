@@ -59,6 +59,10 @@
       "name": "Yennefer",
       "race": "Brujo",
       "location": "Velen"
+    },
+    {
+      "id": 1,
+      "name": "Yennefer"
     }
   ]
 }

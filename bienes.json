@@ -159,6 +159,18 @@
       "material": "Piedra del tiempo",
       "peso": 2,
       "precio": 6000000
+    },
+    {
+      "id": -1,
+      "nombre": "Desconocido",
+      "description": "Desconocido",
+      "material": "Desconocido",
+      "peso": -1,
+      "precio": -1
+    },
+    {
+      "id": 1,
+      "nombre": "Espada"
     }
   ]
 }

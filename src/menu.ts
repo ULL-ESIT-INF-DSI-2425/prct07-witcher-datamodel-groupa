@@ -34,7 +34,7 @@ const posada = new Posada(bien_collection, mercader_collection, clientes_collect
  * @function mostrarMenu
  * @returns {Promise<void>} No retorna ningún valor, pero controla la ejecución del sistema de gestión.
  */
-async function mostrarMenu() {
+export async function mostrarMenu() {
     while (true) {
       const { opcion } = await inquirer.prompt([
         {
